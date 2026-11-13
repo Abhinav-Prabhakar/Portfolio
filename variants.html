@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="robots" content="noindex">
+  <title>Three ways to show the work — Portfolio</title>
+  <meta name="description" content="Three marquee directions for a developer portfolio with thirty-plus projects.">
+  <link rel="icon" href="assets/emoji/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/variants.css">
+</head>
+<body class="lab">
+  <div class="page">
+    <main>
+
+      <section class="hero">
+        <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
+          <span class="hero__line">Making the <span class="emoji emoji--globe" data-globe aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="512" height="512"><img src="assets/emoji/globe-europe-africa.webp" alt="" width="512" height="512"><img src="assets/emoji/globe-asia-australia.webp" alt="" width="512" height="512"></span></span>
+          <span class="hero__line">a better place,</span>
+          <span class="hero__line">one <span class="emoji emoji--ladder" data-ladder aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="512" height="512"></span> at a time.</span>
+        </h1>
+      </section>
+
+      <header class="lab__intro">
+        <p class="lab__eyebrow">Three directions, one decision</p>
+        <h2 class="lab__title">Thirty projects, three ways to hold them.</h2>
+        <p class="lab__lede">
+          The hero stays exactly as it is. Everything below it is up for grabs. Pick a direction and
+          I&rsquo;ll fold it into the real page with your actual projects. Screenshots are still placeholders.
+        </p>
+        <p><a class="lab__link" href="index.html">Back to the current page</a></p>
+      </header>
+
+      <!-- ================= A ================= -->
+      <section class="variant" id="a" aria-labelledby="a-name">
+        <header class="variant__head">
+          <span class="variant__letter" aria-hidden="true">A</span>
+          <div>
+            <h3 class="variant__name" id="a-name">Contact sheet</h3>
+            <p class="variant__desc">
+              Two lanes drifting against each other. Bare thumbnails, no card chrome, name underneath
+              &mdash; the calmest way to show a large body of work.
+            </p>
+          </div>
+          <p class="variant__tags">Ambient &middot; High density</p>
+        </header>
+
+        <div class="sheet" data-sheet>
+          <p class="stage-head"><span>Selected work</span><span data-count>30 projects</span></p>
+          <div class="lane" data-lane></div>
+          <div class="lane" data-lane></div>
+        </div>
+      </section>
+
+      <!-- ================= B ================= -->
+      <section class="variant" id="b" aria-labelledby="b-name">
+        <header class="variant__head">
+          <span class="variant__letter" aria-hidden="true">B</span>
+          <div>
+            <h3 class="variant__name" id="b-name">Focus rail</h3>
+            <p class="variant__desc">
+              One project at full size, its neighbours waiting at the edges. You browse it rather than
+              watch it drift &mdash; and it drifts on its own until you touch it.
+            </p>
+          </div>
+          <p class="variant__tags">Deliberate &middot; One at a time</p>
+        </header>
+
+        <div class="rail" data-rail>
+          <ul class="rail__scroller" data-rail-scroller tabindex="0" role="group" aria-label="Projects"></ul>
+          <div class="rail__bar">
+            <p class="rail__count"><span class="rail__now" data-rail-now>01</span> / 30</p>
+            <div class="rail__progress" aria-hidden="true"><span class="rail__fill" data-rail-fill></span></div>
+            <div class="rail__nav">
+              <button class="rail__btn" type="button" data-rail-prev aria-label="Previous project">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9.75 3.5 5.25 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="rail__btn" type="button" data-rail-next aria-label="Next project">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6.25 3.5 10.75 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= C ================= -->
+      <section class="variant" id="c" aria-labelledby="c-name">
+        <header class="variant__head">
+          <span class="variant__letter" aria-hidden="true">C</span>
+          <div>
+            <h3 class="variant__name" id="c-name">Index</h3>
+            <p class="variant__desc">
+              The names are the work. Three typographic lanes drift past, and a thumbnail surfaces only
+              under your cursor &mdash; almost nothing on the page at rest.
+            </p>
+          </div>
+          <p class="variant__tags">Typographic &middot; Zero chrome</p>
+        </header>
+
+        <div class="index" data-index>
+          <p class="stage-head"><span>All work</span><span data-count>30 projects</span></p>
+          <div class="index__rows">
+            <div class="index__row" data-row></div>
+            <div class="index__row" data-row></div>
+            <div class="index__row" data-row></div>
+          </div>
+          <div class="index__preview" data-preview aria-hidden="true"><img src="assets/sites/01-linear.jpg" alt="" width="1200" height="750"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <nav class="switcher" aria-label="Marquee directions">
+    <a class="switcher__item is-active" href="#a" data-switch><span class="switcher__key" aria-hidden="true">A</span><span class="switcher__label">Contact sheet</span></a>
+    <a class="switcher__item" href="#b" data-switch><span class="switcher__key" aria-hidden="true">B</span><span class="switcher__label">Focus rail</span></a>
+    <a class="switcher__item" href="#c" data-switch><span class="switcher__key" aria-hidden="true">C</span><span class="switcher__label">Index</span></a>
+  </nav>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/variants.js" defer></script>
+</body>
+</html>

@@ -48,9 +48,17 @@ await new Promise((r) => (ws.onopen = r));
 
 let id = 0;
 const pending = new Map();
+const problems = [];
 ws.onmessage = (ev) => {
   const msg = JSON.parse(ev.data);
-  if (msg.id && pending.has(msg.id)) {
+  if (msg.method === "Runtime.exceptionThrown") {
+    const d = msg.params?.exceptionDetails;
+    problems.push(`exception: ${d?.exception?.description || d?.text} @${d?.url}:${d?.lineNumber}`);
+  }
+  if (msg.method === "Log.entryAdded" && msg.params?.entry?.level === "error") {
+    problems.push(`log: ${msg.params.entry.text} ${msg.params.entry.url || ""}`);
+  }
+  if (id && msg.id && pending.has(msg.id)) {
     const { resolve, reject } = pending.get(msg.id);
     pending.delete(msg.id);
     msg.error ? reject(new Error(JSON.stringify(msg.error))) : resolve(msg.result);
@@ -75,6 +83,7 @@ const evaluate = async (expression) => {
 
 await send("Page.enable");
 await send("Runtime.enable");
+await send("Log.enable");
 await send("Emulation.setEmulatedMedia", {
   features: [
     {
@@ -124,7 +133,7 @@ for (const y of scrolls) {
 
 const metrics = await evaluate(
   `(() => {
-    const box = (sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return {top: Math.round(r.top + scrollY), h: Math.round(r.height), w: Math.round(r.width)}; };
+    const box = (sel) => { const el = document.querySelector(sel); if (!el) return null; const r = el.getBoundingClientRect(); return {top: Math.round(r.top + scrollY), h: Math.round(r.height), w: Math.round(r.width)}; };
     return JSON.stringify({
       sw: document.documentElement.scrollWidth,
       sh: document.documentElement.scrollHeight,
@@ -134,6 +143,10 @@ const metrics = await evaluate(
   })()`
 );
 console.log("metrics", metrics);
+
+if (problems.length) {
+  console.log("problems", JSON.stringify(problems, null, 2));
+}
 
 ws.close();
 chrome.kill("SIGKILL");

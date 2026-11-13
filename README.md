@@ -4,6 +4,8 @@ A small developer portfolio, built in plain HTML, CSS and vanilla JS.
 Material 3 Expressive in spirit: white paper, soft black type, generous
 space, and Apple's emoji as the only colour on the page.
 
+Live at **https://abhinav-prabhakar.github.io/Portfolio/**
+
 ## Run it
 
 Open `index.html` directly, or serve the folder:
@@ -17,12 +19,31 @@ python3 -m http.server 4173
 
 ```
 index.html          hero + work strip
+variants.html       three marquee directions, side by side (a lab page)
 css/style.css       design tokens, layout, surfaces
+css/variants.css    lab page only
 js/main.js          globe turntable, ladder spring, marquee
+js/variants.js      the three directions + their project list
 assets/emoji/       Apple emoji rendered to transparent WebP
 assets/sites/       placeholder screenshots for the strip
 scripts/            asset + screenshot tooling (dev only)
 ```
+
+`variants.html` is a comparison page for picking a marquee style once there
+are 30+ projects. It is `noindex` and can be deleted once a direction is
+chosen.
+
+## The three directions
+
+- **A · Contact sheet** — two lanes of bare thumbnails drifting against each
+  other. Highest density, lowest chrome: the whole body of work is legible at
+  a glance.
+- **B · Focus rail** — one project at full size with its neighbours at the
+  edges. Snap-scrolling, arrow-key and button navigation, a position counter,
+  and a slow ambient advance that stops the moment you take over.
+- **C · Index** — project names set as type in three drifting lanes, with a
+  thumbnail that surfaces only under the cursor. Almost nothing on the page
+  at rest.
 
 ## Notes
 
@@ -36,13 +57,19 @@ scripts/            asset + screenshot tooling (dev only)
 - **Marquee:** JS-driven so it decelerates to a stop on hover and glides
   back up to speed. Keyboard focus pauses it and brings the focused card
   into view.
-- **Reduced motion:** the globe, ladder and strip hold still; the strip
-  stays scrollable.
+- **Reduced motion:** the globe, ladder and strips hold still; the strips
+  stay scrollable and the focus rail drops its ambient advance.
 
 ## Placeholders
 
-The ten cards are real screenshots of sites that are not mine — swap the
-`assets/sites/*.jpg` files, names and links in `index.html` when the real
-work is ready. `scripts/fetch-sites.sh` regenerates them.
+The screenshots are real sites that are not mine — swap the `assets/sites/*.jpg`
+files, names and links when the real work is ready. `scripts/fetch-sites.sh`
+regenerates them. In `variants.html` the project list lives in one array at the
+top of `js/variants.js`.
 
 Emoji renders can be rebuilt with `scripts/render-emoji.swift`.
+
+## Deploying
+
+GitHub Pages serves `main` from the repository root, so a push is a deploy.
+`.nojekyll` keeps Pages from touching any underscored paths.
