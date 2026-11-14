@@ -29,21 +29,22 @@ assets/sites/       placeholder screenshots for the strip
 scripts/            asset + screenshot tooling (dev only)
 ```
 
-`variants.html` is a comparison page for picking a marquee style once there
-are 30+ projects. It is `noindex` and can be deleted once a direction is
-chosen.
+`variants.html` is a comparison page for picking how the work is presented
+once there are 30+ projects. It is `noindex` and can be deleted once a
+direction is chosen.
 
-## The three directions
+## The two directions
 
 - **A · Contact sheet** — two lanes of bare thumbnails drifting against each
-  other. Highest density, lowest chrome: the whole body of work is legible at
-  a glance.
-- **B · Focus rail** — one project at full size with its neighbours at the
-  edges. Snap-scrolling, arrow-key and button navigation, a position counter,
-  and a slow ambient advance that stops the moment you take over.
-- **C · Index** — project names set as type in three drifting lanes, with a
-  thumbnail that surfaces only under the cursor. Almost nothing on the page
-  at rest.
+  other. Full-bleed, no card chrome, name underneath. Highest density, lowest
+  noise: the whole body of work is legible at a glance.
+- **B · Gallery** — the same 30 shots on black, edge to edge, with no labels.
+  Clicking one zooms the component itself (not the page) into a detail view:
+  image on the left, title, notes and links on the right. Escape or the close
+  button returns the wall.
+
+Both render from the same `PROJECTS` array, so whichever wins can be lifted
+out with its markup intact.
 
 ## Notes
 

@@ -17,7 +17,7 @@ sites=(
   "08-notion|https://www.notion.com"
   "09-resend|https://resend.com"
   "10-rive|https://rive.app"
-  "11-height|https://height.app"
+  "11-mobbin|https://mobbin.com"
   "12-cal|https://cal.com"
   "13-clerk|https://clerk.com"
   "14-neon|https://neon.tech"
@@ -35,7 +35,7 @@ sites=(
   "26-cursor|https://cursor.com"
   "27-bolt|https://bolt.new"
   "28-v0|https://v0.app"
-  "29-perplexity|https://perplexity.ai"
+  "29-ramp|https://ramp.com"
   "30-cron|https://cron.com"
 )
 

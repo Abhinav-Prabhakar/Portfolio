@@ -1,48 +1,46 @@
 /* ------------------------------------------------------------------
-   Three ways to hold 30+ projects.
+   Two ways to hold 30+ projects.
 
    A · Contact sheet  — two lanes of bare thumbnails drifting apart
-   B · Focus rail     — one project at a time, browsable by hand
-   C · Index          — typographic lanes, thumbnail under the cursor
+   B · Gallery        — a black wall that zooms one shot open in place
 
-   All three read from PROJECTS, so the winner can be lifted straight
-   out with its markup intact.
+   Both read from PROJECTS, so the winner can be lifted straight out.
    ------------------------------------------------------------------ */
 
 (() => {
   "use strict";
 
   const PROJECTS = [
-    { name: "Linear", url: "https://linear.app", img: "01-linear", tag: "Product", year: "2024" },
-    { name: "Stripe", url: "https://stripe.com", img: "02-stripe", tag: "Payments", year: "2023" },
-    { name: "Vercel", url: "https://vercel.com", img: "03-vercel", tag: "Platform", year: "2024" },
-    { name: "Framer", url: "https://www.framer.com", img: "04-framer", tag: "Web design", year: "2022" },
-    { name: "Raycast", url: "https://www.raycast.com", img: "05-raycast", tag: "Tooling", year: "2023" },
-    { name: "Figma", url: "https://www.figma.com", img: "06-figma", tag: "Design", year: "2021" },
-    { name: "Supabase", url: "https://supabase.com", img: "07-supabase", tag: "Platform", year: "2024" },
-    { name: "Notion", url: "https://www.notion.com", img: "08-notion", tag: "Workspace", year: "2022" },
-    { name: "Resend", url: "https://resend.com", img: "09-resend", tag: "Email", year: "2024" },
-    { name: "Rive", url: "https://rive.app", img: "10-rive", tag: "Motion", year: "2023" },
-    { name: "Height", url: "https://height.app", img: "11-height", tag: "Product", year: "2023" },
-    { name: "Cal", url: "https://cal.com", img: "12-cal", tag: "Scheduling", year: "2022" },
-    { name: "Clerk", url: "https://clerk.com", img: "13-clerk", tag: "Auth", year: "2023" },
-    { name: "Neon", url: "https://neon.tech", img: "14-neon", tag: "Database", year: "2024" },
-    { name: "PostHog", url: "https://posthog.com", img: "15-posthog", tag: "Analytics", year: "2023" },
-    { name: "Arc", url: "https://arc.net", img: "16-arc", tag: "Browser", year: "2023" },
-    { name: "Retool", url: "https://retool.com", img: "17-retool", tag: "Internal tools", year: "2022" },
-    { name: "tldraw", url: "https://tldraw.com", img: "18-tldraw", tag: "Canvas", year: "2024" },
-    { name: "Mintlify", url: "https://mintlify.com", img: "19-mintlify", tag: "Docs", year: "2023" },
-    { name: "Plane", url: "https://plane.so", img: "20-plane", tag: "Tracker", year: "2024" },
-    { name: "Dub", url: "https://dub.co", img: "21-dub", tag: "Links", year: "2024" },
-    { name: "Superhuman", url: "https://superhuman.com", img: "22-superhuman", tag: "Email", year: "2021" },
-    { name: "Attio", url: "https://attio.com", img: "23-attio", tag: "CRM", year: "2024" },
-    { name: "Pitch", url: "https://pitch.com", img: "24-pitch", tag: "Decks", year: "2023" },
-    { name: "Descript", url: "https://descript.com", img: "25-descript", tag: "Video", year: "2023" },
-    { name: "Cursor", url: "https://cursor.com", img: "26-cursor", tag: "Editor", year: "2024" },
-    { name: "Bolt", url: "https://bolt.new", img: "27-bolt", tag: "Builder", year: "2025" },
-    { name: "v0", url: "https://v0.app", img: "28-v0", tag: "Builder", year: "2025" },
-    { name: "Perplexity", url: "https://perplexity.ai", img: "29-perplexity", tag: "Search", year: "2024" },
-    { name: "Cron", url: "https://cron.com", img: "30-cron", tag: "Calendar", year: "2023" },
+    { name: "Linear", url: "https://linear.app", img: "01-linear", tag: "Product", year: "2024", blurb: "Issue tracking and project planning rebuilt around speed and a keyboard-first flow." },
+    { name: "Stripe", url: "https://stripe.com", img: "02-stripe", tag: "Payments", year: "2023", blurb: "Payment infrastructure: checkout, billing and financial tooling behind one API." },
+    { name: "Vercel", url: "https://vercel.com", img: "03-vercel", tag: "Platform", year: "2024", blurb: "Frontend deploys at the edge, with previews, logs and analytics in one place." },
+    { name: "Framer", url: "https://www.framer.com", img: "04-framer", tag: "Web design", year: "2022", blurb: "A design canvas that publishes real, responsive websites." },
+    { name: "Raycast", url: "https://www.raycast.com", img: "05-raycast", tag: "Tooling", year: "2023", blurb: "A launcher that puts scripts, windows and the clipboard behind one keystroke." },
+    { name: "Figma", url: "https://www.figma.com", img: "06-figma", tag: "Design", year: "2021", blurb: "Multiplayer design files, from first wireframe to production component." },
+    { name: "Supabase", url: "https://supabase.com", img: "07-supabase", tag: "Platform", year: "2024", blurb: "Postgres, auth, storage and realtime behind one dashboard." },
+    { name: "Notion", url: "https://www.notion.com", img: "08-notion", tag: "Workspace", year: "2022", blurb: "Docs, databases and wikis folding into a single workspace." },
+    { name: "Resend", url: "https://resend.com", img: "09-resend", tag: "Email", year: "2024", blurb: "Transactional email for developers, with a clean API and readable logs." },
+    { name: "Rive", url: "https://rive.app", img: "10-rive", tag: "Motion", year: "2023", blurb: "Interactive motion graphics that ship to web and native." },
+    { name: "Mobbin", url: "https://mobbin.com", img: "11-mobbin", tag: "Reference", year: "2024", blurb: "A searchable library of shipped app and web screens." },
+    { name: "Cal", url: "https://cal.com", img: "12-cal", tag: "Scheduling", year: "2022", blurb: "Open-source scheduling that plugs into any calendar." },
+    { name: "Clerk", url: "https://clerk.com", img: "13-clerk", tag: "Auth", year: "2023", blurb: "Drop-in authentication: sessions, MFA, organisations and user management." },
+    { name: "Neon", url: "https://neon.tech", img: "14-neon", tag: "Database", year: "2024", blurb: "Serverless Postgres with a branch for every preview environment." },
+    { name: "PostHog", url: "https://posthog.com", img: "15-posthog", tag: "Analytics", year: "2023", blurb: "Product analytics, session replay and feature flags in one stack." },
+    { name: "Arc", url: "https://arc.net", img: "16-arc", tag: "Browser", year: "2023", blurb: "A browser that reorganises tabs into spaces and profiles." },
+    { name: "Retool", url: "https://retool.com", img: "17-retool", tag: "Internal tools", year: "2022", blurb: "Internal tools built from a drag-and-drop canvas sitting over your data." },
+    { name: "tldraw", url: "https://tldraw.com", img: "18-tldraw", tag: "Canvas", year: "2024", blurb: "A canvas SDK for drawing, diagramming and infinite boards." },
+    { name: "Mintlify", url: "https://mintlify.com", img: "19-mintlify", tag: "Docs", year: "2023", blurb: "Documentation sites that stay in sync with the codebase." },
+    { name: "Plane", url: "https://plane.so", img: "20-plane", tag: "Tracker", year: "2024", blurb: "Open-source issue tracking with cycles, modules and saved views." },
+    { name: "Dub", url: "https://dub.co", img: "21-dub", tag: "Links", year: "2024", blurb: "Link management with analytics, custom domains and campaign tracking." },
+    { name: "Superhuman", url: "https://superhuman.com", img: "22-superhuman", tag: "Email", year: "2021", blurb: "An email client built for keyboard speed and inbox zero." },
+    { name: "Attio", url: "https://attio.com", img: "23-attio", tag: "CRM", year: "2024", blurb: "A CRM that behaves like a flexible, relational database." },
+    { name: "Pitch", url: "https://pitch.com", img: "24-pitch", tag: "Decks", year: "2023", blurb: "Collaborative decks with live data and shared templates." },
+    { name: "Descript", url: "https://descript.com", img: "25-descript", tag: "Video", year: "2023", blurb: "Edit video by editing the transcript." },
+    { name: "Cursor", url: "https://cursor.com", img: "26-cursor", tag: "Editor", year: "2024", blurb: "An editor with the model woven through the whole workflow." },
+    { name: "Bolt", url: "https://bolt.new", img: "27-bolt", tag: "Builder", year: "2025", blurb: "Prompt a full-stack app into existence in the browser." },
+    { name: "v0", url: "https://v0.app", img: "28-v0", tag: "Builder", year: "2025", blurb: "Generate interface components from a prompt, then refine them in code." },
+    { name: "Ramp", url: "https://ramp.com", img: "29-ramp", tag: "Finance", year: "2024", blurb: "Corporate cards and spend management with the controls built in." },
+    { name: "Cron", url: "https://cron.com", img: "30-cron", tag: "Calendar", year: "2023", blurb: "A calendar with keyboard navigation and clear time zones." },
   ];
 
   document
@@ -53,15 +51,15 @@
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
   const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
   const shot = (p) => `assets/sites/${p.img}.jpg`;
+  const pad = (n) => String(n).padStart(2, "0");
 
   const arrow = `<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
   /* ================================================================
-     Ticker engine — shared by A and C
+     Ticker engine
      ================================================================ */
 
   const tickers = [];
-  
 
   function makeTicker(host, { speed, dir = 1, start = 0, html }) {
     const track = document.createElement("div");
@@ -78,7 +76,7 @@
     const t = { track, group, x: 0, w: 0, speed, dir, vel: 0, paused: false, visible: true, start, measured: false };
     tickers.push(t);
 
-    const lane = host.closest(".lane, .index__row");
+    const lane = host.closest(".lane");
     if (lane) {
       lane.addEventListener("pointerenter", () => (t.paused = true));
       lane.addEventListener("pointerleave", () => {
@@ -133,11 +131,7 @@
 
     for (const t of tickers) {
       if (!t.visible || !t.w) continue;
-
-      if (reduce.matches) {
-        if (t.track.style.transform) t.track.style.transform = "";
-        continue;
-      }
+      if (reduce.matches) continue;
 
       const goal = t.paused ? 0 : t.speed;
       t.vel += (goal - t.vel) * (1 - Math.exp(-dt * 6));
@@ -181,14 +175,14 @@
         .join("");
 
     makeTicker(lanes[0], {
-      speed: 30,
+      speed: 34,
       dir: 1,
       start: 0,
       html: tileHTML(PROJECTS.slice(0, half)),
     });
 
     makeTicker(lanes[1], {
-      speed: 22,
+      speed: 25,
       dir: -1,
       start: 0.55,
       html: tileHTML(PROJECTS.slice(half)),
@@ -196,241 +190,156 @@
   }
 
   /* ================================================================
-     B · Focus rail
+     B · Gallery
      ================================================================ */
 
-  const rail = document.querySelector("[data-rail]");
+  const wall = document.querySelector("[data-wall]");
 
-  if (rail) {
-    const scroller = rail.querySelector("[data-rail-scroller]");
-    const now = rail.querySelector("[data-rail-now]");
-    const fill = rail.querySelector("[data-rail-fill]");
-    const pad = (n) => String(n).padStart(2, "0");
+  if (wall) {
+    const grid = wall.querySelector("[data-wall-grid]");
+    const stage = wall.querySelector("[data-wall-stage]");
+    const figure = wall.querySelector("[data-wall-img]");
+    const elIndex = wall.querySelector("[data-wall-index]");
+    const elTitle = wall.querySelector("[data-wall-title]");
+    const elBlurb = wall.querySelector("[data-wall-blurb]");
+    const elTags = wall.querySelector("[data-wall-tags]");
+    const elVisit = wall.querySelector("[data-wall-visit]");
+    const btnPrev = wall.querySelector("[data-wall-prev]");
+    const btnNext = wall.querySelector("[data-wall-next]");
+    const btnClose = wall.querySelector("[data-wall-close]");
     const total = PROJECTS.length;
 
-    scroller.innerHTML = PROJECTS.map(
+    grid.innerHTML = PROJECTS.map(
       (p, i) => `
-      <li class="rail__slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${total}">
-        <a class="rail__card" href="${p.url}" target="_blank" rel="noopener">
-          <span class="rail__shot"><img src="${shot(p)}" alt="" width="1200" height="750" loading="lazy" decoding="async" draggable="false"></span>
-          <span class="rail__meta">
-            <span class="rail__label">
-              <span class="rail__name">${p.name}</span>
-              <span class="rail__sub">${p.tag} · ${p.year}</span>
-            </span>
-            <span class="rail__go">${arrow}</span>
-          </span>
-        </a>
-      </li>`
+      <button class="wall__tile" type="button" data-i="${i}" aria-label="Preview ${p.name}">
+        <img src="${shot(p)}" alt="" width="1200" height="750" loading="lazy" decoding="async" draggable="false">
+      </button>`
     ).join("");
 
-    const slides = Array.from(scroller.children);
-    let index = 0;
-    let auto = !reduce.matches;
-    let hovering = false;
-    let visible = true;
+    const tiles = Array.from(grid.children);
 
-    const leftOf = (slide) =>
-      slide.getBoundingClientRect().left -
-      scroller.getBoundingClientRect().left +
-      scroller.scrollLeft;
+    let current = -1;
+    let currentTile = null;
+    let closing = false;
+    let swapTimer = 0;
 
-    const goTo = (i, smooth = true) => {
+    const content = (i) => {
+      const p = PROJECTS[i];
+      figure.src = shot(p);
+      figure.alt = `${p.name} home page`;
+      elIndex.textContent = pad(i + 1);
+      elTitle.textContent = p.name;
+      elBlurb.textContent = p.blurb;
+      elTags.textContent = `${p.tag} · ${p.year}`;
+      elVisit.href = p.url;
+      elVisit.setAttribute("aria-label", `Visit ${p.name}`);
+    };
+
+    const insetFor = (tile) => {
+      const box = wall.getBoundingClientRect();
+      const t = tile.getBoundingClientRect();
+      const left = t.left - box.left;
+      const top = t.top - box.top;
+      return `inset(${top.toFixed(1)}px ${(box.width - left - t.width).toFixed(1)}px ${(box.height - top - t.height).toFixed(1)}px ${left.toFixed(1)}px)`;
+    };
+
+    const finishClose = () => {
+      if (!closing) return;
+      closing = false;
+      stage.classList.remove("is-open");
+      stage.style.clipPath = "";
+      current = -1;
+      grid.removeAttribute("inert");
+      grid.removeAttribute("aria-hidden");
+      if (currentTile) currentTile.focus({ preventScroll: true });
+      currentTile = null;
+    };
+
+    const open = (i) => {
+      if (closing) return;
       i = (i + total) % total;
-      const slide = slides[i];
-      scroller.scrollTo({
-        left: leftOf(slide) - (scroller.clientWidth - slide.clientWidth) / 2,
-        behavior: smooth && !reduce.matches ? "smooth" : "auto",
-      });
-    };
+      const tile = tiles[i];
 
-    const paint = (i) => {
-      if (i === index && slides[i].classList.contains("is-active")) return;
-      index = i;
-      slides.forEach((s, n) => s.classList.toggle("is-active", n === i));
-      if (now) now.textContent = pad(i + 1);
-      if (fill) fill.style.width = `${((i + 1) / total) * 100}%`;
-    };
-
-    let queued = false;
-    const onScroll = () => {
-      if (queued) return;
-      queued = true;
-      requestAnimationFrame(() => {
-        queued = false;
-        const center = scroller.scrollLeft + scroller.clientWidth / 2;
-        let best = 0;
-        let bestDistance = Infinity;
-        slides.forEach((slide, i) => {
-          const d = Math.abs(leftOf(slide) + slide.clientWidth / 2 - center);
-          if (d < bestDistance) {
-            bestDistance = d;
-            best = i;
-          }
-        });
-        paint(best);
-      });
-    };
-
-    scroller.addEventListener("scroll", onScroll, { passive: true });
-
-    rail.querySelectorAll("[data-rail-prev], [data-rail-next]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        auto = false;
-        goTo(index + (btn.hasAttribute("data-rail-prev") ? -1 : 1));
-      });
-    });
-
-    /* Any deliberate input takes over from the ambient advance. */
-    const takeOver = () => (auto = false);
-    rail.addEventListener("pointerdown", takeOver);
-
-    rail.addEventListener("focusin", () => {
-      hovering = true;
-    });
-    rail.addEventListener("focusout", (e) => {
-      if (!rail.contains(e.relatedTarget)) hovering = false;
-    });
-    if (fine.matches) {
-      rail.addEventListener("pointerenter", () => (hovering = true));
-      rail.addEventListener("pointerleave", () => (hovering = false));
-    }
-
-    scroller.addEventListener("keydown", (e) => {
-      const keys = { ArrowLeft: -1, ArrowRight: 1, PageUp: -1, PageDown: 1 };
-      if (e.key in keys) {
-        e.preventDefault();
-        takeOver();
-        goTo(index + keys[e.key]);
-      } else if (e.key === "Home" || e.key === "End") {
-        e.preventDefault();
-        takeOver();
-        goTo(e.key === "Home" ? 0 : total - 1);
-      }
-    });
-
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(([entry]) => (visible = entry.isIntersecting)).observe(rail);
-    }
-
-    window.setInterval(() => {
-      if (!auto || !visible || hovering) return;
-      if (document.hidden) return;
-      goTo(index + 1);
-    }, 5200);
-
-    paint(0);
-    window.addEventListener("load", () => paint(0));
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => {
-        paint(index);
-      });
-    }
-  }
-
-  /* ================================================================
-     C · Index
-     ================================================================ */
-
-  const index = document.querySelector("[data-index]");
-
-  if (index) {
-    const rows = Array.from(index.querySelectorAll("[data-row]"));
-    const preview = index.querySelector("[data-preview]");
-    const previewImg = preview.querySelector("img");
-    const perRow = Math.ceil(PROJECTS.length / rows.length);
-
-    const nameHTML = (list) =>
-      list
-        .map(
-          (p) => `
-        <li class="index__item">
-          <a class="index__name" href="${p.url}" target="_blank" rel="noopener" data-shot="${shot(p)}" data-name="${p.name}">${p.name}</a>
-          <span class="index__dot" aria-hidden="true"></span>
-        </li>`
-        )
-        .join("");
-
-    rows.forEach((row, i) => {
-      makeTicker(row, {
-        speed: [26, 17, 31][i % 3],
-        dir: i % 2 === 0 ? 1 : -1,
-        start: [0, 0.35, 0.7][i % 3],
-        html: nameHTML(PROJECTS.slice(i * perRow, (i + 1) * perRow)),
-      });
-    });
-
-    /* ---- hover preview ---- */
-    let pointerX = 0;
-    let pointerY = 0;
-    let active = null;
-
-    const place = (x, y) => {
-      const w = preview.offsetWidth || 200;
-      const h = preview.offsetHeight || 125;
-      let left = x + 24;
-      let top = y - h - 18;
-
-      if (top < 14) top = y + 30;
-      if (left + w > window.innerWidth - 18) left = x - w - 24;
-
-      left = clamp(left, 18, Math.max(18, window.innerWidth - w - 18));
-      top = clamp(top, 18, Math.max(18, window.innerHeight - h - 18));
-      preview.style.setProperty("--x", `${left}px`);
-      preview.style.setProperty("--y", `${top}px`);
-    };
-
-    const show = (link, x, y) => {
-      window.clearTimeout(hideTimer);
-      if (active !== link) {
-        active = link;
-        previewImg.src = link.dataset.shot;
-      }
-      preview.classList.add("is-visible");
-      place(x, y);
-    };
-
-    let hideTimer = 0;
-
-    const hide = (delay) => {
-      window.clearTimeout(hideTimer);
-      if (delay) {
-        hideTimer = window.setTimeout(() => hide(), 140);
+      /* already open — swap the contents rather than re-running the zoom */
+      if (current >= 0) {
+        if (i === current) return;
+        window.clearTimeout(swapTimer);
+        current = i;
+        figure.classList.add("is-fading");
+        swapTimer = window.setTimeout(() => {
+          content(i);
+          figure.classList.remove("is-fading");
+        }, 130);
         return;
       }
-      active = null;
-      preview.classList.remove("is-visible");
+
+      current = i;
+      currentTile = tile;
+      content(i);
+
+      stage.style.transition = "none";
+      stage.style.clipPath = insetFor(tile);
+      stage.classList.add("is-open");
+      grid.setAttribute("inert", "");
+      grid.setAttribute("aria-hidden", "true");
+
+      void stage.offsetWidth; /* commit the small clip before animating */
+      stage.style.transition = "";
+
+      requestAnimationFrame(() => {
+        stage.style.clipPath = "inset(0px 0px 0px 0px)";
+      });
+
+      btnClose.focus({ preventScroll: true });
     };
 
-    if (fine.matches) {
-      index.addEventListener("pointermove", (e) => {
-        pointerX = e.clientX;
-        pointerY = e.clientY;
-        const link = e.target.closest(".index__name");
-        if (link) show(link, pointerX, pointerY);
-        else hide(true);
-      });
+    const close = () => {
+      if (current < 0 || closing) return;
+      closing = true;
+      window.clearTimeout(swapTimer);
+      figure.classList.remove("is-fading");
 
-      index.addEventListener("pointerleave", () => hide());
-    }
+      if (reduce.matches || !currentTile) {
+        finishClose();
+        return;
+      }
 
-    index.addEventListener("focusin", (e) => {
-      const link = e.target.closest(".index__name");
-      if (!link) return;
-      const box = link.getBoundingClientRect();
-      active = null;
-      show(link, box.right - 40, box.top + box.height / 2);
+      const done = () => {
+        stage.removeEventListener("transitionend", done);
+        finishClose();
+      };
+
+      stage.style.clipPath = insetFor(currentTile);
+      stage.addEventListener("transitionend", done);
+      window.setTimeout(done, 900);
+    };
+
+    grid.addEventListener("click", (event) => {
+      const tile = event.target.closest(".wall__tile");
+      if (!tile) return;
+      open(Number(tile.dataset.i));
     });
 
-    index.addEventListener("focusout", (e) => {
-      if (!index.contains(e.relatedTarget)) hide();
-    });
+    btnClose.addEventListener("click", close);
+    btnPrev.addEventListener("click", () => open(current - 1));
+    btnNext.addEventListener("click", () => open(current + 1));
 
-    if (reduce.matches) {
-      index.querySelectorAll(".index__row").forEach((row) => {
-        row.style.overflowX = "auto";
-      });
-    }
+    /* Escape and the arrow keys work wherever focus happens to be while
+       the zoomed view is open. */
+    document.addEventListener("keydown", (event) => {
+      if (current < 0) return;
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        open(current - 1);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        open(current + 1);
+      }
+    });
   }
 
   /* ================================================================
