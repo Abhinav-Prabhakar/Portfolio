@@ -80,11 +80,29 @@ body {
 /* ---------- hero ---------- */
 
 .hero {
+  position: relative;
   min-height: calc(100vh - clamp(140px, 22vh, 220px));
   min-height: calc(100svh - clamp(140px, 22svh, 220px));
   display: grid;
   align-content: center;
   padding: clamp(72px, 15vh, 150px) var(--gutter) clamp(24px, 4vh, 56px);
+}
+
+.hero__body {
+  position: relative;
+}
+
+/* the review rail: the three right-hand placements share the column and
+   spread down it, so they never sit on top of each other */
+.hero__rail {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: calc(-1 * clamp(14px, 3vh, 44px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
 .hero__title {
@@ -147,6 +165,243 @@ body {
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ---------- experience ----------
+   Two roles, told with the logos rather than with prose. Four placements
+   are in the page for review; the switch at the bottom left picks one. */
+
+.roles {
+  --logo: 26px;
+}
+
+.roles__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.role {
+  display: flex;
+  gap: 10px;
+}
+
+.role__logo {
+  flex: none;
+  width: var(--logo);
+  height: var(--logo);
+  border-radius: 7px;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+.role__body {
+  min-width: 0;
+}
+
+.role__title {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.25;
+  color: var(--ink-soft);
+}
+
+.role__meta {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  line-height: 1.25;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- the switch (review only) ---------- */
+
+.variants {
+  position: fixed;
+  left: var(--gutter);
+  bottom: 16px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 4px 5px 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 1px 2px rgba(32, 33, 36, 0.05),
+    0 12px 26px -18px rgba(32, 33, 36, 0.4);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.variants__label {
+  margin-right: 4px;
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
+
+.variants button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-faint);
+  cursor: pointer;
+  transition: color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+
+.variants button:hover {
+  color: var(--ink);
+}
+
+.variants button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* one placement at a time. The rail keeps its slots so each one stays
+   where it belongs; C is in the flow, so it collapses instead. */
+body[data-variant] .roles {
+  visibility: hidden;
+}
+
+body[data-variant="a"] .roles--a,
+body[data-variant="b"] .roles--b,
+body[data-variant="d"] .roles--d {
+  visibility: visible;
+}
+
+body[data-variant] .roles--c {
+  display: none;
+}
+
+body[data-variant="c"] .roles--c {
+  display: block;
+  visibility: visible;
+}
+
+/* C — continues the greeting column, under the university line */
+.roles--c {
+  position: relative;
+  margin-top: 12px;
+}
+
+.roles--c .roles__list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.roles--c .role {
+  --logo: 15px;
+  align-items: center;
+  gap: 7px;
+}
+
+.roles--c .role__logo {
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+.roles--c .role__body {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.roles--c .role__title {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+.roles--c .role__title::after {
+  content: ",";
+}
+
+.roles--c .role__meta {
+  margin: 0;
+  font-size: 12.5px;
+}
+
+/* A — a quiet two-row column, at the top of the rail */
+.roles--a {
+  position: relative;
+}
+
+.roles--a .roles__list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* B — the logos threaded on one hairline, midway down the rail */
+.roles--b {
+  position: relative;
+}
+
+.roles--b .roles__list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.roles--b .roles__list::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--logo) / 2);
+  top: -16px;
+  bottom: -16px;
+  width: 1px;
+  background: rgba(32, 33, 36, 0.18);
+}
+
+.roles--b .role__logo {
+  box-shadow: 0 0 0 5px var(--paper);
+}
+
+/* D — the pair side by side, at the foot of the rail */
+.roles--d {
+  position: relative;
+}
+
+.roles--d .roles__list {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 4px 40px;
+}
+
+.roles--d .role {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.roles--d .role__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* On a phone there is no rail to place anything against, so the inline
+   version is the only one that exists. */
+@media (max-width: 900px) {
+  .variants,
+  .hero__rail {
+    display: none;
+  }
+
+  body[data-variant] .roles--c {
+    display: block;
+    visibility: visible;
   }
 }
 

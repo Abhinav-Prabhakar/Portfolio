@@ -24,7 +24,7 @@ place.html          noindex review page: where the name and the JNTUH line sit
 css/style.css       design tokens, layout, surfaces, the sheet
 js/main.js          WebGL globe + ladder spring
 js/work.js          the project list and the drifting lanes
-assets/img/         the JNTUH crest, cropped and upscaled 3×
+assets/img/         the JNTUH crest and the two company marks
 assets/emoji/       Apple emoji at the native 160 px strike
 assets/projects/    37 stills + 12 hover loops
 scripts/            asset + screenshot tooling (dev only)
@@ -92,6 +92,13 @@ image, optional hover clip, aspect ratio and tags. A project without a URL
 - **`intro.html`:** five name treatments (sweeping light, pencil and arrow,
   curtain, outline to ink, weight wave) kept as a noindex review page. Each
   row can be replayed.
+- **Experience:** two roles — Founding Engineer at TrovoFi (Feb–Oct 2026) and
+  Lead Software Engineer at Optern (Aug 2025–Feb 2026) — told with the company
+  marks rather than prose. Four placements are in the page for review, picked
+  with the switch at the bottom left; only the chosen one survives. Three use
+  a right-hand rail (top, middle, foot), and the fourth continues the greeting
+  column under the university line, which is also the only one a phone gets.
+  The switcher is review chrome and goes with the three unused placements.
 - **`place.html`:** the pencil-and-arrow name in four arrangements — above the
   statement, above it without an arrow, signed underneath, and signed
   underneath without an arrow — each with the JNTUH line beneath the name.
