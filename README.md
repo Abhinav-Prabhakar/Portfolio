@@ -24,18 +24,19 @@ css/style.css       design tokens, layout, surfaces, the sheet
 js/main.js          WebGL globe + ladder spring
 js/work.js          the project list and the drifting lanes
 assets/emoji/       Apple emoji at the native 160 px strike
-assets/projects/    47 stills + 13 hover loops
+assets/projects/    37 stills + 12 hover loops
 scripts/            asset + screenshot tooling (dev only)
 ```
 
 ## The work
 
-Forty-seven projects: every repository that ships a screenshot in its README,
-private work included. Two lanes of bare thumbnails drift against each other
-and loop without a seam. Hover eases a lane to a stop; where the README has a
-GIF, the tile plays it as a muted MP4 loop.
-Keyboard focus stops the lane and centres the focused tile. With reduced motion
-the sheet becomes a static responsive grid.
+Thirty-seven projects: every repository that ships a screenshot in its README,
+private work included. Three rows of bare thumbnails fill one screen — tile
+width comes from the row height, so the whole sheet is visible at once on any
+window. Alternate rows drift against each other and loop without a seam. Hover
+eases a row to a stop; where the README has a GIF, the tile plays it as a muted
+MP4 loop. Keyboard focus stops the row and centres the focused tile. With
+reduced motion the sheet becomes a static responsive grid.
 
 Terminal-first tools are left out — this is the visual work.
 

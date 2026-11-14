@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pencil and arrow — placements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ---- the mark, reused in every placement ---- */
+
+  .mark {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.35em;
+    font-family: "Caveat", cursive;
+    font-weight: 600;
+    color: var(--ink-faint);
+    line-height: 1;
+  }
+
+  .mark__name {
+    white-space: nowrap;
+    transform: rotate(-1.6deg);
+    line-height: 0.95;
+  }
+
+  .mark__col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+
+  /* ---- the education line, always quiet ---- */
+
+  .edu {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0;
+    font-family: var(--font);
+    font-size: 12.5px;
+    line-height: 1;
+    letter-spacing: 0.004em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .edu img {
+    width: 17px;
+    height: 18px;
+    object-fit: contain;
+    opacity: 0.8;
+  }
+
+  .v--a .mark__col { gap: 13px; }
+  .v--b .edu {
+    position: absolute;
+    top: clamp(34px, 5vh, 52px);
+    right: var(--gutter);
+    flex-direction: row-reverse;
+  }
+  .v--c .edu {
+    position: absolute;
+    top: calc(clamp(28px, 5.5vh, 54px) + 40px);
+    left: var(--gutter);
+  }
+  .v--d .edu {
+    position: absolute;
+    bottom: clamp(20px, 4vh, 38px);
+    left: var(--gutter);
+  }
+
+  .mark__arrow {
+    flex: none;
+    overflow: visible;
+    margin-top: 0.25em;
+  }
+
+  .mark__arrow path {
+    fill: none;
+    stroke: var(--ink-faint);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: draw 1.2s var(--ease-out) 0.55s forwards;
+  }
+
+  .mark__arrow .tr {
+    stroke-width: 1.1;
+    stroke-opacity: 0.45;
+    animation-delay: 0.6s;
+  }
+
+  .mark__arrow .head {
+    stroke-dasharray: 44;
+    stroke-dashoffset: 44;
+    animation-delay: 1.35s;
+    animation-duration: 0.35s;
+  }
+
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  /* ---- frames ---- */
+
+  .frame { margin: 0; }
+
+  .frame + .frame { border-top: 1px solid var(--line); }
+
+  .frame figcaption {
+    padding: 0 var(--gutter) clamp(40px, 6vh, 64px);
+    margin-top: -0.4em;
+    font-size: 13.5px;
+    letter-spacing: 0.005em;
+    color: var(--ink-faint);
+  }
+
+  .frame figcaption b {
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+
+  .hero { position: relative; }
+
+  /* A — eyebrow, above, arrow down to the statement */
+  .v--a .mark {
+    font-size: clamp(26px, 2.6vw, 38px);
+    margin-bottom: 0.1em;
+  }
+  .v--a .mark__arrow { width: clamp(78px, 8vw, 118px); }
+
+  /* B — signature, below, arrow back up at the statement */
+  .v--b .mark {
+    font-size: clamp(30px, 3.1vw, 46px);
+    margin-top: clamp(14px, 2.2vh, 26px);
+  }
+  .v--b .mark__arrow { width: clamp(86px, 9vw, 132px); margin-top: -0.1em; }
+
+  /* C — masthead, top corner, arrow down */
+  .v--c .mark {
+    position: absolute;
+    top: clamp(28px, 5.5vh, 54px);
+    left: var(--gutter);
+    font-size: clamp(20px, 1.7vw, 26px);
+    gap: 0.3em;
+  }
+  .v--c .mark__arrow { width: clamp(44px, 4.4vw, 66px); margin-top: 0.2em; }
+
+  /* D — name as the headline, statement as a lede */
+  .v--d .mark {
+    font-size: clamp(46px, 5.8vw, 86px);
+    margin-bottom: 0.06em;
+  }
+  .v--d .mark__arrow { width: clamp(56px, 5.4vw, 82px); margin-top: 0.5em; }
+  .v--d .hero__title {
+    font-size: clamp(26px, 3.5vw, 52px);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    color: var(--ink-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mark__arrow path { animation: none; stroke-dashoffset: 0; }
+    .hero__line { animation: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+<main>
+
+  <figure class="frame">
+    <section class="hero v--a">
+      <div class="mark" aria-label="Hi, I’m Abhinav Prabhakar">
+        <span class="mark__col">
+          <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
+          <span class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</span>
+        </span>
+        <svg class="mark__arrow" viewBox="0 0 130 110" aria-hidden="true">
+          <path d="M6 8 C 34 26, 58 48, 84 70 C 96 80, 106 88, 114 94" />
+          <path class="tr" d="M8 10 C 36 27, 60 49, 85 71 C 97 81, 107 89, 115 95" />
+          <path class="head" d="M114 94 L 97 90 M114 94 L 107 78" />
+        </svg>
+      </div>
+      <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
+        <span class="hero__line">Making the <span class="emoji emoji--globe" aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
+        <span class="hero__line">a better place,</span>
+        <span class="hero__line">one <span class="emoji emoji--ladder" aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
+      </h1>
+    </section>
+    <figcaption><b>A — Eyebrow.</b> Small, above the statement, arrow falling into the first line. Education tucked under the name.</figcaption>
+  </figure>
+
+  <figure class="frame">
+    <section class="hero v--b">
+      <p class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
+      <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
+        <span class="hero__line">Making the <span class="emoji emoji--globe" aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
+        <span class="hero__line">a better place,</span>
+        <span class="hero__line">one <span class="emoji emoji--ladder" aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
+      </h1>
+      <div class="mark" aria-label="Hi, I’m Abhinav Prabhakar">
+        <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
+        <svg class="mark__arrow" viewBox="0 0 140 120" aria-hidden="true">
+          <path d="M6 100 C 36 118, 84 104, 110 52 C 114 46, 118 38, 122 28" />
+          <path class="tr" d="M8 102 C 38 120, 86 106, 111 53 C 115 47, 119 39, 123 29" />
+          <path class="head" d="M122 28 L 108 38 M122 28 L 112 44" />
+        </svg>
+      </div>
+    </section>
+    <figcaption><b>B — Signature.</b> Below the statement, arrow curling back up at it. Education alone in the top corner.</figcaption>
+  </figure>
+
+  <figure class="frame">
+    <section class="hero v--c">
+      <div class="mark" aria-label="Hi, I’m Abhinav Prabhakar">
+        <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
+        <svg class="mark__arrow" viewBox="0 0 90 220" aria-hidden="true">
+          <path d="M12 6 C 46 52, 62 130, 56 198" />
+          <path class="tr" d="M14 7 C 48 53, 64 131, 57 199" />
+          <path class="head" d="M56 198 L 44 182 M56 198 L 68 184" />
+        </svg>
+      </div>
+      <p class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
+      <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
+        <span class="hero__line">Making the <span class="emoji emoji--globe" aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
+        <span class="hero__line">a better place,</span>
+        <span class="hero__line">one <span class="emoji emoji--ladder" aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
+      </h1>
+    </section>
+    <figcaption><b>C — Masthead.</b> Top corner, like a wordmark, a long thin arrow dropping to the statement. Education right beneath it.</figcaption>
+  </figure>
+
+  <figure class="frame">
+    <section class="hero v--d">
+      <p class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
+      <div class="mark" aria-label="Hi, I’m Abhinav Prabhakar">
+        <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
+        <svg class="mark__arrow" viewBox="0 0 96 86" aria-hidden="true">
+          <path d="M84 6 C 74 42, 48 62, 16 70" />
+          <path class="tr" d="M85 7 C 75 43, 49 63, 17 71" />
+          <path class="head" d="M16 70 L 30 58 M16 70 L 32 78" />
+        </svg>
+      </div>
+      <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
+        <span class="hero__line">Making the <span class="emoji emoji--globe" aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
+        <span class="hero__line">a better place,</span>
+        <span class="hero__line">one <span class="emoji emoji--ladder" aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
+      </h1>
+    </section>
+    <figcaption><b>D — Headline.</b> The name takes the top weight, the statement settles into a grey lede. Education left down in the corner.</figcaption>
+  </figure>
+
+</main>
+</div>
+</body>
+</html>

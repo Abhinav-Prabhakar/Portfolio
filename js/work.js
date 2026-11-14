@@ -202,16 +202,6 @@ const PROJECTS = [
         "A real-time digital twin of a hydroponic greenhouse: 42 simulated sensors, ten pieces of equipment you can drive, and an ESP8266 that takes over when the browser closes.",
     },
     {
-      name: "Waterful",
-      url: "https://github.com/Abhinav-Prabhakar/Waterful",
-      img: "waterful",
-      video: "waterful",
-      ratio: 1600 / 764,
-      tags: ["Health", "Web"],
-      blurb:
-        "A small Razor Pages app that counts your glasses, keeps the streak alive and quietly nudges you toward eight cups a day.",
-    },
-    {
       name: "10,000 Hours",
       url: "https://abhinav-prabhakar.github.io/10k/",
       img: "tenk",
@@ -334,15 +324,6 @@ const PROJECTS = [
         "A calendar operating system: pull events out of every chat app, see the team's timelines side by side and find the hour that actually works.",
     },
     {
-      name: "LinkVault",
-      url: "https://link-vault-omega.vercel.app/",
-      img: "linkvault",
-      ratio: 1600 / 884,
-      tags: ["Tools", "Reading"],
-      blurb:
-        "A local-first vault for the links you swear you'll reread, with optional AI tagging so the pile turns back into a library.",
-    },
-    {
       name: "Papyrus",
       url: "https://github.com/Abhinav-Prabhakar/Papyrus",
       img: "papyrus",
@@ -361,51 +342,6 @@ const PROJECTS = [
         "An AI-driven traffic operations platform: city-scale monitoring, incident detection and signal analytics in one console.",
     },
     {
-      name: "ECE Definitions",
-      url: "https://abhinav-prabhakar.github.io/ECEDefinitions/",
-      img: "ece",
-      ratio: 1440 / 1000,
-      tags: ["Education", "Engineering"],
-      blurb:
-        "Circuit, signal and semiconductor definitions as one-liners you can drill in a spare minute.",
-    },
-    {
-      name: "Software Definitions",
-      url: "https://abhinav-prabhakar.github.io/SoftwareDefinitions/",
-      img: "software",
-      ratio: 1440 / 1000,
-      tags: ["Education", "Reference"],
-      blurb:
-        "The vocabulary that shows up in every system-design round, reduced to one line each and drilled until it's automatic.",
-    },
-    {
-      name: "Plumbing Definitions",
-      url: "https://abhinav-prabhakar.github.io/PlumbingDefinitions/",
-      img: "plumbing",
-      ratio: 1440 / 1000,
-      tags: ["Education", "Trade"],
-      blurb:
-        "Plumbing code one-liners — the numbers and terms a licensed job turns on, in plain language.",
-    },
-    {
-      name: "Pharmacology Definitions",
-      url: "https://abhinav-prabhakar.github.io/PharmacologyDefinitions/",
-      img: "pharmacology",
-      ratio: 1440 / 1000,
-      tags: ["Education", "Health"],
-      blurb:
-        "Drug classes, mechanisms and side effects as one-line cards, built for the ten minutes before a quiz.",
-    },
-    {
-      name: "Nursing Definitions",
-      url: "https://abhinav-prabhakar.github.io/NursingDefinitions/",
-      img: "nursing",
-      ratio: 1440 / 1000,
-      tags: ["Education", "Health"],
-      blurb:
-        "NCLEX terminology as one-liners, grouped the way the exam actually asks for it.",
-    },
-    {
       name: "NEC Definitions",
       url: "https://abhinav-prabhakar.github.io/NECDefinitions/",
       img: "nec",
@@ -415,24 +351,6 @@ const PROJECTS = [
         "Electrical code definitions from the NEC, stripped to a sentence each and drilled until they stick.",
     },
     {
-      name: "Medical Definitions",
-      url: "https://abhinav-prabhakar.github.io/MedicalDefinitions/",
-      img: "medical",
-      ratio: 1440 / 1000,
-      tags: ["Education", "Health"],
-      blurb:
-        "Medical terminology one-liners for the prefixes, procedures and findings you meet on the ward.",
-    },
-    {
-      name: "Legal Definitions",
-      url: "https://abhinav-prabhakar.github.io/LegalDefinitions/",
-      img: "legal",
-      ratio: 1440 / 1000,
-      tags: ["Education", "Law"],
-      blurb:
-        "US law definitions as one-liners — the terms that decide an argument, without the casebook.",
-    },
-    {
       name: "HVAC Definitions",
       url: "https://abhinav-prabhakar.github.io/HVACDefinitions/",
       img: "hvac",
@@ -440,15 +358,6 @@ const PROJECTS = [
       tags: ["Education", "Trade"],
       blurb:
         "HVAC one-liners for the load, the duct and the refrigerant, in language a tech actually uses.",
-    },
-    {
-      name: "Anatomy Definitions",
-      url: "https://abhinav-prabhakar.github.io/AnatomyDefinitions/",
-      img: "anatomy",
-      ratio: 1440 / 1000,
-      tags: ["Education", "Health"],
-      blurb:
-        "Anatomy definitions as one-line cards, from planes and processes to the things they attach to.",
     },
   ];
 
@@ -504,7 +413,16 @@ const PROJECTS = [
   if (!sheet) return;
 
   const hosts = Array.from(sheet.querySelectorAll("[data-lane]"));
-  if (hosts.length !== 2) return;
+  if (hosts.length !== 3) return;
+
+  /* tiles are sized from the row they sit in, so three rows always fill the
+     screen; the lane's padding is not part of the tile */
+  const sizeRows = () => {
+    const style = getComputedStyle(hosts[0]);
+    const pad = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+    const h = hosts[0].getBoundingClientRect().height - pad;
+    if (h > 40) sheet.style.setProperty("--row-h", `${h.toFixed(1)}px`);
+  };
 
   const tileHTML = (list) =>
     list
@@ -654,21 +572,33 @@ const PROJECTS = [
     return t;
   }
 
-  const half = Math.ceil(PROJECTS.length / 2);
+  const third = Math.ceil(PROJECTS.length / 3);
 
   makeLane(hosts[0], {
     speed: 34,
     dir: 1,
     start: 0,
-    html: tileHTML(PROJECTS.slice(0, half)),
+    html: tileHTML(PROJECTS.slice(0, third)),
   });
 
   makeLane(hosts[1], {
     speed: 25,
     dir: -1,
-    start: 0.55,
-    html: tileHTML(PROJECTS.slice(half)),
+    start: 0.45,
+    html: tileHTML(PROJECTS.slice(third, third * 2)),
   });
+
+  makeLane(hosts[2], {
+    speed: 29,
+    dir: 1,
+    start: 0.7,
+    html: tileHTML(PROJECTS.slice(third * 2)),
+  });
+
+  sizeRows();
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(sizeRows).observe(hosts[0]);
+  }
 
   bindHoverVideo(sheet, ".tile");
 
