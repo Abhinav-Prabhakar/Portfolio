@@ -24,6 +24,7 @@ place.html          noindex review page: where the name and the JNTUH line sit
 css/style.css       design tokens, layout, surfaces, the sheet
 js/main.js          WebGL globe + ladder spring
 js/work.js          the project list and the drifting lanes
+assets/img/         the JNTUH crest, cropped and upscaled 3×
 assets/emoji/       Apple emoji at the native 160 px strike
 assets/projects/    37 stills + 12 hover loops
 scripts/            asset + screenshot tooling (dev only)
@@ -32,9 +33,11 @@ scripts/            asset + screenshot tooling (dev only)
 ## The work
 
 Thirty-seven projects: every repository that ships a screenshot in its README,
-private work included. Three rows of bare thumbnails fill one screen — tile
-width comes from the row height, so the whole sheet is visible at once on any
-window. Alternate rows drift against each other and loop without a seam. Hover
+private work included. Three rows of bare thumbnails fill one screen — each row
+is a third of the sheet and the tile width comes from the row height at a 17:10
+frame, so the whole sheet is visible at once on any window. The gutter between
+tiles is deliberately narrower than the page gutter: the pictures carry the
+section, not the space around them. Alternate rows drift against each other and loop without a seam. Hover
 eases a row to a stop; where the README has a GIF, the tile plays it as a muted
 MP4 loop. Keyboard focus stops the row and centres the focused tile. With
 reduced motion the sheet becomes a static responsive grid.
@@ -61,6 +64,11 @@ image, optional hover clip, aspect ratio and tags. A project without a URL
 ## Notes
 
 - **Type:** Google Sans if installed, otherwise [Figtree](https://fonts.google.com/specimen/Figtree).
+  The greeting is [Caveat](https://fonts.google.com/specimen/Caveat) at 600.
+- **Greeting:** “Hi, I’m Abhinav Prabhakar” in grey handwriting above the
+  statement, with the JNTUH crest and “Studied at JNTUH, CSE AI/ML” beneath it
+  as a footnote — same grey, 12.5 px, the crest at 17 px and 80% opacity. It
+  sits inside the centred hero block, so it never pushes the sheet down.
 - **Emoji:** the PNGs are Apple Color Emoji lifted from the font's 160 px
   strike, so they are the exact pixels macOS draws. They sit on the text
   baseline the way an inline emoji does: ink 0.97 em tall, foot 0.105 em below

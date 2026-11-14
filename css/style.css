@@ -13,6 +13,7 @@
   --line: rgba(32, 33, 36, 0.07);
   --gutter: clamp(20px, 5vw, 64px);
   --gap: clamp(14px, 1.5vw, 24px);
+  --tile-gap: clamp(10px, 1vw, 16px);
   --radius-card: 30px;
   --radius-shot: 22px;
   --ease: cubic-bezier(0.2, 0, 0, 1);
@@ -93,6 +94,60 @@ body {
   line-height: 1.03;
   letter-spacing: -0.038em;
   text-wrap: balance;
+}
+
+/* ---------- greeting ----------
+   Handwritten and grey, sitting above the statement the way a note is
+   left at the top of a page. The university line is a footnote to it,
+   not a badge: same grey, half the weight of a caption. */
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(9px, 1.4vh, 14px);
+  margin-bottom: clamp(10px, 1.6vh, 18px);
+  animation: greeting-in 0.95s var(--ease-out) both;
+}
+
+.greeting__name {
+  margin: 0;
+  font-family: "Caveat", cursive;
+  font-size: clamp(26px, 2.7vw, 40px);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink-faint);
+  transform: rotate(-1.3deg);
+  transform-origin: 0 80%;
+}
+
+.greeting__edu {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1;
+  letter-spacing: 0.004em;
+  color: var(--ink-faint);
+}
+
+.greeting__edu img {
+  width: 17px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.8;
+}
+
+@keyframes greeting-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .hero__line {
@@ -186,7 +241,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
-  padding: clamp(18px, 3.4vh, 40px) 0 clamp(16px, 3vh, 34px);
+  padding: clamp(14px, 2.6vh, 30px) 0 clamp(12px, 2.4vh, 26px);
   animation: work-in 1.1s var(--ease-out) 0.3s both;
 }
 
@@ -226,7 +281,7 @@ body {
 
 .work__lede {
   max-width: 52ch;
-  margin: 14px 0 clamp(14px, 2.2vh, 26px);
+  margin: 10px 0 clamp(10px, 1.8vh, 20px);
   padding-inline: var(--gutter);
   font-size: clamp(0.95rem, 1.05vw, 1.08rem);
   line-height: 1.55;
@@ -236,12 +291,12 @@ body {
 
 .sheet {
   --row-h: 200px;
-  --name-h: 34px;
+  --name-h: 25px;
   flex: 1 1 auto;
   min-height: 0;
   display: grid;
   grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: clamp(8px, 1.6vh, 20px);
+  gap: clamp(6px, 1.1vh, 13px);
 }
 
 .lane {
@@ -249,7 +304,7 @@ body {
   min-height: 0;
   display: flex;
   overflow: clip;
-  padding-block: 10px;
+  padding-block: 5px;
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0,
@@ -277,16 +332,16 @@ body {
   display: flex;
   align-items: stretch;
   height: 100%;
-  gap: var(--gap);
+  gap: var(--tile-gap);
   margin: 0;
-  padding: 0 var(--gap) 0 0;
+  padding: 0 var(--tile-gap) 0 0;
   list-style: none;
 }
 
 .tile {
   flex: 0 0 auto;
   height: 100%;
-  width: calc((var(--row-h) - var(--name-h)) * 1.6);
+  width: calc((var(--row-h) - var(--name-h)) * 1.7);
   transition: opacity 0.45s var(--ease-out);
 }
 
@@ -299,9 +354,9 @@ body {
 .tile__shot {
   position: relative;
   display: block;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 17 / 10;
   overflow: hidden;
-  border-radius: clamp(16px, 1.4vw, 22px);
+  border-radius: clamp(14px, 1.3vw, 20px);
   background: #f1f1f2;
   box-shadow: 0 1px 2px rgba(32, 33, 36, 0.06),
     0 14px 30px -20px rgba(32, 33, 36, 0.42);
@@ -335,8 +390,9 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding-top: 12px;
-  font-size: 0.92rem;
+  padding-top: 8px;
+  font-size: 0.88rem;
+  line-height: 1.15;
   font-weight: 500;
   letter-spacing: -0.008em;
   color: var(--ink-soft);
@@ -474,6 +530,7 @@ body {
 /* ---------- reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
+  .greeting,
   .hero__line,
   .work {
     animation: none;
