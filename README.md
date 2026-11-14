@@ -20,6 +20,7 @@ python3 -m http.server 4173
 ```
 index.html          hero + selected work
 intro.html          noindex review page with five name treatments
+place.html          noindex review page: where the name and the JNTUH line sit
 css/style.css       design tokens, layout, surfaces, the sheet
 js/main.js          WebGL globe + ladder spring
 js/work.js          the project list and the drifting lanes
@@ -83,6 +84,12 @@ image, optional hover clip, aspect ratio and tags. A project without a URL
 - **`intro.html`:** five name treatments (sweeping light, pencil and arrow,
   curtain, outline to ink, weight wave) kept as a noindex review page. Each
   row can be replayed.
+- **`place.html`:** the pencil-and-arrow name in four arrangements — above the
+  statement, above it without an arrow, signed underneath, and signed
+  underneath without an arrow — each with the JNTUH line beneath the name.
+  The arrows are measured at runtime: they leave the last letter horizontally,
+  bend once, and land on the rim of the thing they point at (the globe, or the
+  full stop), so they keep their aim at any window width.
 
 Emoji renders can be rebuilt with `scripts/render-emoji.swift`.
 

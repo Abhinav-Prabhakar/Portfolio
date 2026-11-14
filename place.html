@@ -10,38 +10,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
-  /* ---- the mark, reused in every placement ---- */
+  .frame { margin: 0; }
+  .frame + .frame { border-top: 1px solid var(--line); }
+
+  .frame figcaption {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 var(--gutter) clamp(34px, 5vh, 56px);
+    margin-top: -0.2em;
+    font-size: 13.5px;
+    letter-spacing: 0.005em;
+    color: var(--ink-faint);
+  }
+
+  .frame figcaption b { font-weight: 500; color: var(--ink-soft); }
+
+  .replay {
+    flex: none;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: var(--ink-faint);
+    cursor: pointer;
+    transition: color 0.2s var(--ease);
+  }
+  .replay:hover { color: var(--ink); }
+
+  .hero { position: relative; }
+
+  /* ---------- the mark ---------- */
 
   .mark {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 0.35em;
+    gap: 12px;
     font-family: "Caveat", cursive;
     font-weight: 600;
     color: var(--ink-faint);
     line-height: 1;
+    width: max-content;
   }
 
   .mark__name {
+    display: block;
     white-space: nowrap;
-    transform: rotate(-1.6deg);
-    line-height: 0.95;
+    transform: rotate(-1.3deg);
+    transform-origin: 0 80%;
   }
 
-  .mark__col {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5em;
-  }
-
-  /* ---- the education line, always quiet ---- */
-
+  /* education, always a quiet footnote */
   .edu {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    margin: 0;
     font-family: var(--font);
     font-size: 12.5px;
     line-height: 1;
@@ -57,118 +82,71 @@
     opacity: 0.8;
   }
 
-  .v--a .mark__col { gap: 13px; }
-  .v--b .edu {
-    position: absolute;
-    top: clamp(34px, 5vh, 52px);
-    right: var(--gutter);
-    flex-direction: row-reverse;
-  }
-  .v--c .edu {
-    position: absolute;
-    top: calc(clamp(28px, 5.5vh, 54px) + 40px);
-    left: var(--gutter);
-  }
-  .v--d .edu {
-    position: absolute;
-    bottom: clamp(20px, 4vh, 38px);
-    left: var(--gutter);
-  }
+  /* ---------- the arrow ----------
+     Geometry is measured in JS: it leaves the last letter of the name
+     horizontally, bends once, and lands on the rim of whatever it is
+     meant to point at, with the head aimed at that object's centre. */
 
   .mark__arrow {
-    flex: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     overflow: visible;
-    margin-top: 0.25em;
+    pointer-events: none;
+    color: var(--ink-faint);
   }
 
   .mark__arrow path {
     fill: none;
-    stroke: var(--ink-faint);
-    stroke-width: 2.4;
+    stroke: currentColor;
+    stroke-width: 1.7;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke-dasharray: 300;
-    stroke-dashoffset: 300;
-    animation: draw 1.2s var(--ease-out) 0.55s forwards;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
   }
 
-  .mark__arrow .tr {
-    stroke-width: 1.1;
-    stroke-opacity: 0.45;
-    animation-delay: 0.6s;
-  }
+  .mark__arrow .echo { stroke-opacity: 0.32; }
 
-  .mark__arrow .head {
-    stroke-dasharray: 44;
-    stroke-dashoffset: 44;
-    animation-delay: 1.35s;
-    animation-duration: 0.35s;
-  }
+  .frame.is-in .mark__arrow .line { animation: draw 0.95s var(--ease-out) 0.25s forwards; }
+  .frame.is-in .mark__arrow .echo { animation: draw 0.95s var(--ease-out) 0.33s forwards; }
+  .frame.is-in .mark__arrow .head { animation: draw 0.28s var(--ease-out) 1.08s forwards; }
 
   @keyframes draw { to { stroke-dashoffset: 0; } }
 
-  /* ---- frames ---- */
+  /* ---------- A · eyebrow ---------- */
 
-  .frame { margin: 0; }
-
-  .frame + .frame { border-top: 1px solid var(--line); }
-
-  .frame figcaption {
-    padding: 0 var(--gutter) clamp(40px, 6vh, 64px);
-    margin-top: -0.4em;
-    font-size: 13.5px;
-    letter-spacing: 0.005em;
-    color: var(--ink-faint);
-  }
-
-  .frame figcaption b {
-    font-weight: 500;
-    color: var(--ink-soft);
-  }
-
-  .hero { position: relative; }
-
-  /* A — eyebrow, above, arrow down to the statement */
   .v--a .mark {
-    font-size: clamp(26px, 2.6vw, 38px);
-    margin-bottom: 0.1em;
+    font-size: clamp(26px, 2.7vw, 40px);
+    margin-bottom: clamp(18px, 3.4vh, 34px);
   }
-  .v--a .mark__arrow { width: clamp(78px, 8vw, 118px); }
 
-  /* B — signature, below, arrow back up at the statement */
+  .v--a-plain .mark {
+    font-size: clamp(26px, 2.7vw, 40px);
+    margin-bottom: clamp(9px, 1.5vh, 16px);
+  }
+
+  /* ---------- B · signature ---------- */
+
   .v--b .mark {
     font-size: clamp(30px, 3.1vw, 46px);
-    margin-top: clamp(14px, 2.2vh, 26px);
+    margin-top: clamp(22px, 3.4vh, 40px);
   }
-  .v--b .mark__arrow { width: clamp(86px, 9vw, 132px); margin-top: -0.1em; }
 
-  /* C — masthead, top corner, arrow down */
-  .v--c .mark {
-    position: absolute;
-    top: clamp(28px, 5.5vh, 54px);
-    left: var(--gutter);
-    font-size: clamp(20px, 1.7vw, 26px);
-    gap: 0.3em;
-  }
-  .v--c .mark__arrow { width: clamp(44px, 4.4vw, 66px); margin-top: 0.2em; }
-
-  /* D — name as the headline, statement as a lede */
-  .v--d .mark {
-    font-size: clamp(46px, 5.8vw, 86px);
-    margin-bottom: 0.06em;
-  }
-  .v--d .mark__arrow { width: clamp(56px, 5.4vw, 82px); margin-top: 0.5em; }
-  .v--d .hero__title {
-    font-size: clamp(26px, 3.5vw, 52px);
-    font-weight: 400;
-    line-height: 1.12;
-    letter-spacing: -0.025em;
-    color: var(--ink-soft);
+  .v--b-plain .mark {
+    font-size: clamp(30px, 3.1vw, 46px);
+    margin-top: clamp(16px, 2.4vh, 28px);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .mark__arrow path { animation: none; stroke-dashoffset: 0; }
+    .mark__arrow path { stroke-dashoffset: 0; animation: none !important; }
     .hero__line { animation: none; }
+  }
+
+  @media (max-width: 720px) {
+    .frame figcaption { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .v--a .mark { margin-bottom: 14px; }
   }
 </style>
 </head>
@@ -176,18 +154,34 @@
 <div class="page">
 <main>
 
-  <figure class="frame">
-    <section class="hero v--a">
+  <figure class="frame v--a">
+    <section class="hero">
       <div class="mark" aria-label="Hi, I’m Abhinav Prabhakar">
-        <span class="mark__col">
-          <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
-          <span class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</span>
-        </span>
-        <svg class="mark__arrow" viewBox="0 0 130 110" aria-hidden="true">
-          <path d="M6 8 C 34 26, 58 48, 84 70 C 96 80, 106 88, 114 94" />
-          <path class="tr" d="M8 10 C 36 27, 60 49, 85 71 C 97 81, 107 89, 115 95" />
-          <path class="head" d="M114 94 L 97 90 M114 94 L 107 78" />
-        </svg>
+        <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
+        <span class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</span>
+      </div>
+      <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
+        <span class="hero__line">Making the <span class="emoji emoji--globe" aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
+        <span class="hero__line">a better place,</span>
+        <span class="hero__line">one <span class="emoji emoji--ladder" aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
+      </h1>
+      <svg class="mark__arrow" data-arrow=".emoji--globe img" data-pad="9" data-swing="0.5" aria-hidden="true">
+        <path class="line" pathLength="1" />
+        <path class="echo" pathLength="1" />
+        <path class="head" pathLength="1" />
+      </svg>
+    </section>
+    <figcaption>
+      <span><b>A — Eyebrow, with the arrow.</b> Leaves the end of the name, bends once, lands on the globe.</span>
+      <button class="replay" type="button">Replay</button>
+    </figcaption>
+  </figure>
+
+  <figure class="frame v--a-plain">
+    <section class="hero">
+      <div class="mark" aria-label="Hi, I’m Abhinav Prabhakar">
+        <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
+        <span class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</span>
       </div>
       <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
         <span class="hero__line">Making the <span class="emoji emoji--globe" aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
@@ -195,12 +189,37 @@
         <span class="hero__line">one <span class="emoji emoji--ladder" aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
       </h1>
     </section>
-    <figcaption><b>A — Eyebrow.</b> Small, above the statement, arrow falling into the first line. Education tucked under the name.</figcaption>
+    <figcaption>
+      <span><b>A — Eyebrow, no arrow.</b> Same spot, tighter spacing. Quietest of the four.</span>
+      <button class="replay" type="button">Replay</button>
+    </figcaption>
   </figure>
 
-  <figure class="frame">
-    <section class="hero v--b">
-      <p class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
+  <figure class="frame v--b">
+    <section class="hero">
+      <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
+        <span class="hero__line">Making the <span class="emoji emoji--globe" aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
+        <span class="hero__line">a better place,</span>
+        <span class="hero__line">one <span class="emoji emoji--ladder" aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time<span class="dot">.</span></span>
+      </h1>
+      <div class="mark" aria-label="Hi, I’m Abhinav Prabhakar">
+        <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
+        <span class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</span>
+      </div>
+      <svg class="mark__arrow" data-arrow=".dot" data-aim="under" data-pad="10" data-swing="0.46" aria-hidden="true">
+        <path class="line" pathLength="1" />
+        <path class="echo" pathLength="1" />
+        <path class="head" pathLength="1" />
+      </svg>
+    </section>
+    <figcaption>
+      <span><b>B — Signature, with the arrow.</b> Signs underneath and points back up at the full stop.</span>
+      <button class="replay" type="button">Replay</button>
+    </figcaption>
+  </figure>
+
+  <figure class="frame v--b-plain">
+    <section class="hero">
       <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
         <span class="hero__line">Making the <span class="emoji emoji--globe" aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
         <span class="hero__line">a better place,</span>
@@ -208,57 +227,172 @@
       </h1>
       <div class="mark" aria-label="Hi, I’m Abhinav Prabhakar">
         <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
-        <svg class="mark__arrow" viewBox="0 0 140 120" aria-hidden="true">
-          <path d="M6 100 C 36 118, 84 104, 110 52 C 114 46, 118 38, 122 28" />
-          <path class="tr" d="M8 102 C 38 120, 86 106, 111 53 C 115 47, 119 39, 123 29" />
-          <path class="head" d="M122 28 L 108 38 M122 28 L 112 44" />
-        </svg>
+        <span class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</span>
       </div>
     </section>
-    <figcaption><b>B — Signature.</b> Below the statement, arrow curling back up at it. Education alone in the top corner.</figcaption>
-  </figure>
-
-  <figure class="frame">
-    <section class="hero v--c">
-      <div class="mark" aria-label="Hi, I’m Abhinav Prabhakar">
-        <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
-        <svg class="mark__arrow" viewBox="0 0 90 220" aria-hidden="true">
-          <path d="M12 6 C 46 52, 62 130, 56 198" />
-          <path class="tr" d="M14 7 C 48 53, 64 131, 57 199" />
-          <path class="head" d="M56 198 L 44 182 M56 198 L 68 184" />
-        </svg>
-      </div>
-      <p class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
-      <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
-        <span class="hero__line">Making the <span class="emoji emoji--globe" aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
-        <span class="hero__line">a better place,</span>
-        <span class="hero__line">one <span class="emoji emoji--ladder" aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
-      </h1>
-    </section>
-    <figcaption><b>C — Masthead.</b> Top corner, like a wordmark, a long thin arrow dropping to the statement. Education right beneath it.</figcaption>
-  </figure>
-
-  <figure class="frame">
-    <section class="hero v--d">
-      <p class="edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
-      <div class="mark" aria-label="Hi, I’m Abhinav Prabhakar">
-        <span class="mark__name">Hi, I’m Abhinav Prabhakar</span>
-        <svg class="mark__arrow" viewBox="0 0 96 86" aria-hidden="true">
-          <path d="M84 6 C 74 42, 48 62, 16 70" />
-          <path class="tr" d="M85 7 C 75 43, 49 63, 17 71" />
-          <path class="head" d="M16 70 L 30 58 M16 70 L 32 78" />
-        </svg>
-      </div>
-      <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
-        <span class="hero__line">Making the <span class="emoji emoji--globe" aria-hidden="true"><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
-        <span class="hero__line">a better place,</span>
-        <span class="hero__line">one <span class="emoji emoji--ladder" aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
-      </h1>
-    </section>
-    <figcaption><b>D — Headline.</b> The name takes the top weight, the statement settles into a grey lede. Education left down in the corner.</figcaption>
+    <figcaption>
+      <span><b>B — Signature, no arrow.</b> Just a signature under the line.</span>
+      <button class="replay" type="button">Replay</button>
+    </figcaption>
   </figure>
 
 </main>
 </div>
+
+<script>
+(() => {
+  const f = (n) => Math.round(n * 10) / 10;
+  const unit = (x, y) => {
+    const l = Math.hypot(x, y) || 1;
+    return [x / l, y / l];
+  };
+
+  const arrows = [...document.querySelectorAll("[data-arrow]")].map((svg) => {
+    const hero = svg.closest(".hero");
+    return {
+      svg,
+      hero,
+      name: hero.querySelector(".mark__name"),
+      target: hero.querySelector(svg.dataset.arrow),
+      aim: svg.dataset.aim || "rim",
+      pad: parseFloat(svg.dataset.pad || "10"),
+      swing: parseFloat(svg.dataset.swing || "0.46"),
+      sag: parseFloat(svg.dataset.sag || "0"),
+      paths: {
+        line: svg.querySelector(".line"),
+        echo: svg.querySelector(".echo"),
+        head: svg.querySelector(".head"),
+      },
+    };
+  });
+
+  function layout() {
+    for (const a of arrows) {
+      if (!a.target || !a.name) continue;
+
+      const hb = a.hero.getBoundingClientRect();
+      const nb = a.name.getBoundingClientRect();
+      const tb = a.target.getBoundingClientRect();
+      if (hb.width < 2 || tb.width < 2) continue;
+
+      a.svg.setAttribute("viewBox", `0 0 ${f(hb.width)} ${f(hb.height)}`);
+
+      /* leave the last letter just past its edge, at roughly mid-height */
+      const sx = nb.right - hb.left + 12;
+      const sy = nb.top - hb.top + nb.height * 0.55;
+
+      const cx = tb.left - hb.left + tb.width / 2;
+      const cy = tb.top - hb.top + tb.height / 2;
+
+      let ex, ey, uix, uiy;
+
+      if (a.aim === "under") {
+        /* come up from beneath the mark and point straight at it, so the
+           line never crosses the words above it. The mark's box is the
+           em square, so the ink sits around four-fifths down. */
+        const ink = tb.top - hb.top + tb.height * 0.78;
+        ex = cx + 3;
+        ey = ink + a.pad;
+        [uix, uiy] = unit(-0.28, -1);
+      } else {
+        /* land on the rim wherever the name happens to sit, aimed at the
+           centre of the thing */
+        const r = Math.min(tb.width, tb.height) / 2 + a.pad;
+        [uix, uiy] = unit(cx - sx, cy - sy);
+        ex = cx - uix * r;
+        ey = cy - uiy * r;
+      }
+
+      const dist = Math.hypot(ex - sx, ey - sy);
+
+      /* no room to draw anything sensible — leave the name alone */
+      if (dist < 44) {
+        a.svg.style.display = "none";
+        continue;
+      }
+      a.svg.style.display = "";
+
+      const c1x = sx + (ex - sx) * a.swing;
+      const c1y = sy + a.sag;
+
+      /* approach from behind along the incoming direction, so the head aims */
+      const m = dist * 0.42;
+      const c2x = ex - uix * m;
+      const c2y = ey - uiy * m;
+
+      a.paths.line.setAttribute(
+        "d",
+        `M${f(sx)} ${f(sy)} C${f(c1x)} ${f(c1y)} ${f(c2x)} ${f(c2y)} ${f(ex)} ${f(ey)}`
+      );
+
+      /* a second, lighter pass a hair off the first: pencil, not vector */
+      const tx = ex - uix * 4;
+      const ty = ey - uiy * 4;
+      a.paths.echo.setAttribute(
+        "d",
+        `M${f(sx + 0.7)} ${f(sy + 1.5)} C${f(c1x + 1.1)} ${f(c1y + 2)} ${f(c2x + 1.6)} ${f(c2y + 1.4)} ${f(tx)} ${f(ty)}`
+      );
+
+      /* two barbs, 13 long, 26° either side of the aim */
+      const ang = Math.atan2(uiy, uix);
+      const len = 13;
+      const barb = (rot) => {
+        const t = ang + rot;
+        return [f(ex - Math.cos(t) * len), f(ey - Math.sin(t) * len)];
+      };
+      const [b1x, b1y] = barb(0.454);
+      const [b2x, b2y] = barb(-0.454);
+      a.paths.head.setAttribute(
+        "d",
+        `M${b1x} ${b1y} L${f(ex)} ${f(ey)} L${b2x} ${b2y}`
+      );
+    }
+  }
+
+  /* draw each arrow as its frame arrives */
+  const frames = [...document.querySelectorAll(".frame")];
+  const draw = (frame) => frame.classList.add("is-in");
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            draw(e.target);
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { threshold: 0.35 }
+    );
+    frames.forEach((fr) => io.observe(fr));
+  } else {
+    frames.forEach(draw);
+  }
+
+  frames.forEach((frame) => {
+    const btn = frame.querySelector(".replay");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      frame.classList.remove("is-in");
+      void frame.offsetWidth;
+      requestAnimationFrame(() => frame.classList.add("is-in"));
+    });
+  });
+
+  layout();
+  document.fonts?.ready.then(layout);
+
+  let raf = 0;
+  addEventListener(
+    "resize",
+    () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(layout);
+    },
+    { passive: true }
+  );
+})();
+</script>
 </body>
 </html>
