@@ -98,6 +98,11 @@ await send("Emulation.setDeviceMetricsOverride", {
   deviceScaleFactor: Number(process.env.DPR || 2),
   mobile: false,
 });
+if (process.env.INIT) {
+  await send("Page.addScriptToEvaluateOnNewDocument", {
+    source: process.env.INIT,
+  });
+}
 await send("Page.navigate", { url });
 await wait(1200);
 await evaluate("document.fonts.ready.then(() => true)");

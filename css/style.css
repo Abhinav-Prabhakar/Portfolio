@@ -120,47 +120,60 @@ body {
 }
 
 /* ---------- emoji ----------
-   The PNGs are full Apple emoji renders on a square canvas, so the
-   glyph sits inside ~10% of padding. The wrapper is zero-height: the
-   images are absolutely placed against the text baseline, which keeps
-   them from inflating the tight display line-height. */
+   The PNGs are Apple Color Emoji at their native 160px strike, which is
+   the raster macOS itself draws — no resampling, so the colours and the
+   silhouette are exactly what the system shows. The wrapper is
+   zero-height and the art is placed against the text baseline, measured
+   off a real inline emoji in Safari/Chrome: the ink is 0.97em tall and
+   its foot sits 0.105em under the baseline. */
 
 .emoji {
   position: relative;
   display: inline-block;
-  width: 1.16em;
+  width: 1em;
   height: 0;
   vertical-align: baseline;
 }
 
-.emoji img {
+.emoji img,
+.emoji__canvas {
   position: absolute;
-  left: 0;
-  bottom: -0.24em;
-  width: 100%;
-  height: 1.16em;
+  left: 50%;
+  bottom: -0.114em;
+  width: 0.985em;
+  height: 0.985em;
+  transform: translateX(-50%);
   object-fit: contain;
   user-select: none;
   -webkit-user-drag: none;
 }
 
+.emoji img {
+  transition: opacity 0.35s var(--ease);
+}
+
+.emoji img.is-hidden {
+  opacity: 0;
+}
+
 .emoji--globe {
-  margin-inline: -0.05em 0.015em;
+  margin-inline: 0.02em 0.04em;
 }
 
-.emoji--globe img {
-  will-change: opacity;
+.emoji__canvas {
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
 }
 
-.emoji--ladder {
-  width: 1.4em;
-  margin-inline: -0.17em;
+.emoji__canvas.is-ready {
+  opacity: 1;
 }
 
+/* the ladder is animated from JS, which owns its transform, so it is not
+   offset with translateX like the other glyphs */
 .emoji--ladder img {
-  bottom: -0.33em;
-  height: 1.4em;
-  transform-origin: 50% 91%;
+  left: 0;
+  transform-origin: 50% 96%;
   will-change: transform;
 }
 

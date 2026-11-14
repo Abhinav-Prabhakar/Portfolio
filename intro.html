@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Name treatments — Abhinav Prabhakar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #202124;
+    --soft: #5f6368;
+    --faint: #9aa0a6;
+    --line: rgba(32, 33, 36, 0.08);
+    --ease: cubic-bezier(0.2, 0, 0, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --font: "Google Sans", "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: #fff;
+    color: var(--ink);
+    font-family: var(--font);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 64px);
+  }
+
+  /* ---------- header ---------- */
+
+  .head {
+    padding: clamp(48px, 9vh, 96px) 0 clamp(28px, 4vh, 44px);
+  }
+
+  .head h1 {
+    margin: 0 0 10px;
+    font-size: clamp(24px, 2.4vw, 30px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .head p {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--soft);
+  }
+
+  /* ---------- rows ---------- */
+
+  .row {
+    display: grid;
+    grid-template-columns: 148px minmax(0, 1fr);
+    gap: clamp(16px, 2.4vw, 40px);
+    align-items: center;
+    padding: clamp(40px, 6vh, 68px) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .row:last-of-type { border-bottom: 1px solid var(--line); }
+
+  .meta { align-self: start; padding-top: 10px; }
+
+  .meta b {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .meta span {
+    display: block;
+    margin-top: 6px;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--faint);
+    max-width: 15em;
+  }
+
+  .replay {
+    margin-top: 14px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 12.5px;
+    letter-spacing: 0.01em;
+    color: var(--faint);
+    cursor: pointer;
+    transition: color 0.2s var(--ease);
+  }
+
+  .replay:hover { color: var(--ink); }
+
+  .stage {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+  }
+
+  .name {
+    margin: 0;
+    font-size: clamp(28px, 3.9vw, 56px);
+    font-weight: 500;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    white-space: nowrap;
+  }
+
+  /* ---------- 01 · sweeping light ---------- */
+
+  .t1 {
+    background-image: linear-gradient(
+      100deg,
+      var(--ink) 0%,
+      var(--ink) 38%,
+      #c3c7cc 50%,
+      var(--ink) 62%,
+      var(--ink) 100%
+    );
+    background-size: 260% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: t1-sweep 6.5s var(--ease) infinite;
+  }
+
+  @keyframes t1-sweep {
+    0%   { background-position: 100% 0; }
+    55%  { background-position: 0% 0; }
+    100% { background-position: 0% 0; }
+  }
+
+  /* ---------- 02 · handwriting + arrow ---------- */
+
+  .t2 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: clamp(8px, 1.6vw, 22px);
+  }
+
+  .t2__point {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(8px, 1.2vw, 16px);
+  }
+
+  .t2__name {
+    font-family: "Caveat", cursive;
+    font-weight: 600;
+    font-size: clamp(38px, 4.6vw, 64px);
+    line-height: 1;
+    letter-spacing: 0;
+    color: var(--faint);
+    transform: rotate(-1.6deg);
+    white-space: nowrap;
+  }
+
+  .t2__arrow {
+    width: clamp(84px, 9vw, 124px);
+    height: auto;
+    flex: none;
+    overflow: visible;
+  }
+
+  .t2__arrow path {
+    fill: none;
+    stroke: var(--faint);
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 320;
+    stroke-dashoffset: 320;
+    animation: t2-draw 1.4s var(--ease-out) 0.5s forwards;
+  }
+
+  .t2__arrow .t2__trace {
+    stroke-width: 1.1;
+    stroke-opacity: 0.5;
+    animation-delay: 0.55s;
+  }
+
+  .t2__arrow .t2__head {
+    stroke-dasharray: 44;
+    stroke-dashoffset: 44;
+    animation-delay: 1.55s;
+    animation-duration: 0.4s;
+  }
+
+  @keyframes t2-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .t2__globe {
+    width: clamp(40px, 4.4vw, 60px);
+    height: auto;
+    flex: none;
+    transform: rotate(1.6deg);
+  }
+
+  /* ---------- 03 · letter curtain ---------- */
+
+  .t3 .w { display: inline-block; }
+
+  .t3 .ch {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-bottom: 0.14em;
+    margin-bottom: -0.14em;
+  }
+
+  .t3 .ch > i {
+    display: inline-block;
+    font-style: normal;
+    transform: translateY(115%);
+    animation: t3-rise 0.9s var(--ease-out) forwards;
+    animation-delay: calc(var(--i) * 32ms + 0.25s);
+  }
+
+  @keyframes t3-rise {
+    to { transform: none; }
+  }
+
+  /* ---------- 04 · outline to ink ---------- */
+
+  .t4 {
+    position: relative;
+    display: inline-block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #d4d7db;
+  }
+
+  .t4__ink {
+    position: absolute;
+    inset: 0;
+    color: var(--ink);
+    -webkit-text-stroke: 0;
+    clip-path: inset(0 100% 0 0);
+    animation: t4-fill 1.9s var(--ease-out) 0.45s forwards;
+  }
+
+  .t4__caret {
+    position: absolute;
+    top: 0.08em;
+    bottom: 0.08em;
+    left: 0;
+    width: 2px;
+    background: var(--ink);
+    opacity: 0;
+    animation: t4-caret 1.9s var(--ease-out) 0.45s forwards;
+  }
+
+  @keyframes t4-fill {
+    to { clip-path: inset(0 0 0 0); }
+  }
+
+  @keyframes t4-caret {
+    0%   { left: 0; opacity: 1; }
+    99%  { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
+
+  /* ---------- 05 · weight wave ---------- */
+
+  .t5 .w { display: inline-block; }
+  .t5 .ch { display: inline-block; }
+
+  .t5 .ch > i {
+    display: inline-block;
+    font-style: normal;
+    animation: t5-wave 3.6s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -0.09s);
+  }
+
+  @keyframes t5-wave {
+    0%, 46%, 100% { font-weight: 400; }
+    18%           { font-weight: 800; }
+  }
+
+  /* ---------- footer ---------- */
+
+  .foot {
+    padding: 40px 0 80px;
+    font-size: 13.5px;
+    color: var(--faint);
+  }
+
+  @media (max-width: 720px) {
+    .row { grid-template-columns: 1fr; gap: 16px; padding: 34px 0; }
+    .meta { padding-top: 0; }
+    .meta b { font-size: 14px; }
+    .meta span { margin-top: 4px; max-width: 34ch; }
+    .stage { min-height: 96px; }
+    .name { white-space: normal; }
+    .t2__point { margin-left: auto; margin-right: 4px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t1 { animation: none; color: var(--ink); background: none; }
+    .t2__arrow path { animation: none; stroke-dashoffset: 0; }
+    .t3 .ch > i { animation: none; transform: none; }
+    .t4__ink { animation: none; clip-path: none; }
+    .t4__caret { display: none; }
+    .t5 .ch > i { animation: none; font-weight: 500; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <h1>Hi, I’m Abhinav Prabhakar — five ways</h1>
+    <p>Name treatments for the top of the hero. Same paper, same ink; pick the one that feels like you and it gets built into the page at the right size.</p>
+  </header>
+
+  <section class="row">
+    <div class="meta">
+      <b>01 · Sweeping light</b>
+      <span>A pale band of light crosses the name, once every few seconds.</span>
+      <button class="replay" type="button">Replay</button>
+    </div>
+    <div class="stage">
+      <p class="name t1">Hi, I’m Abhinav Prabhakar</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="meta">
+      <b>02 · Pencil and arrow</b>
+      <span>Grey handwriting, a hand-drawn arrow, the globe it points at.</span>
+      <button class="replay" type="button">Replay</button>
+    </div>
+    <div class="stage">
+      <div class="t2">
+        <span class="t2__name">Hi, I’m Abhinav Prabhakar</span>
+        <span class="t2__point">
+          <svg class="t2__arrow" viewBox="0 0 190 100" aria-hidden="true">
+            <path d="M4 24 C 30 64, 58 84, 92 86 C 126 88, 152 68, 170 42" />
+            <path class="t2__trace" d="M6 26 C 32 64, 60 82, 92 84 C 126 86, 152 66, 169 41" />
+            <path class="t2__head" d="M170 42 L 155 51 M170 42 L 168 60" />
+          </svg>
+          <img class="t2__globe" src="assets/emoji/globe-americas.webp" alt="" width="160" height="160">
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="meta">
+      <b>03 · Curtain</b>
+      <span>The name rises letter by letter out of its own baseline.</span>
+      <button class="replay" type="button">Replay</button>
+    </div>
+    <div class="stage">
+      <p class="name t3" data-split>Hi, I’m Abhinav Prabhakar</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="meta">
+      <b>04 · Outline to ink</b>
+      <span>Hairline outline, then the ink wipes in behind a caret.</span>
+      <button class="replay" type="button">Replay</button>
+    </div>
+    <div class="stage">
+      <p class="name t4" aria-label="Hi, I’m Abhinav Prabhakar"><span class="t4__ink" aria-hidden="true">Hi, I’m Abhinav Prabhakar</span><span aria-hidden="true">Hi, I’m Abhinav Prabhakar</span><span class="t4__caret" aria-hidden="true"></span></p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="meta">
+      <b>05 · Weight wave</b>
+      <span>Weight travels through the letters, like a hand pressing down.</span>
+      <button class="replay" type="button">Replay</button>
+    </div>
+    <div class="stage">
+      <p class="name t5" data-split>Hi, I’m Abhinav Prabhakar</p>
+    </div>
+  </section>
+
+  <p class="foot">Noindex review page — not part of the site.</p>
+
+</div>
+
+<script>
+  document.querySelectorAll(".row").forEach((row) => {
+    const btn = row.querySelector(".replay");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      row.getAnimations({ subtree: true }).forEach((a) => {
+        a.currentTime = 0;
+        a.play();
+      });
+    });
+  });
+
+  document.querySelectorAll("[data-split]").forEach((el) => {
+    const text = el.textContent.trim();
+    el.setAttribute("aria-label", text);
+    el.textContent = "";
+    let i = 0;
+    text.split(" ").forEach((word, w) => {
+      const box = document.createElement("span");
+      box.className = "w";
+      for (const ch of word) {
+        const c = document.createElement("span");
+        c.className = "ch";
+        c.style.setProperty("--i", i++);
+        const inner = document.createElement("i");
+        inner.textContent = ch;
+        c.appendChild(inner);
+        box.appendChild(c);
+      }
+      el.appendChild(box);
+      if (w < text.split(" ").length - 1) el.appendChild(document.createTextNode(" "));
+    });
+  });
+</script>
+</body>
+</html>

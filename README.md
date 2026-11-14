@@ -19,10 +19,11 @@ python3 -m http.server 4173
 
 ```
 index.html          hero + selected work
+intro.html          noindex review page with five name treatments
 css/style.css       design tokens, layout, surfaces, the sheet
-js/main.js          globe turntable + ladder spring
+js/main.js          WebGL globe + ladder spring
 js/work.js          the project list and the drifting lanes
-assets/emoji/       Apple emoji rendered to transparent WebP
+assets/emoji/       Apple emoji at the native 160 px strike
 assets/projects/    47 stills + 13 hover loops
 scripts/            asset + screenshot tooling (dev only)
 ```
@@ -58,15 +59,29 @@ image, optional hover clip, aspect ratio and tags. A project without a URL
 ## Notes
 
 - **Type:** Google Sans if installed, otherwise [Figtree](https://fonts.google.com/specimen/Figtree).
-- **Globe:** three Apple globe renders (Americas → Europe–Africa →
-  Asia–Australia) are crossfaded as the page scrolls, with a little motion
-  blur and scroll easing. One full revolution over the first screenful.
-- **Ladder:** a slow idle sway plus a damped spring that lifts and tilts it
-  when the page moves.
+- **Emoji:** the PNGs are Apple Color Emoji lifted from the font's 160 px
+  strike, so they are the exact pixels macOS draws. They sit on the text
+  baseline the way an inline emoji does: ink 0.97 em tall, foot 0.105 em below
+  the baseline.
+- **Globe:** a real sphere, not a crossfade. WebGL casts a ray per pixel and
+  samples an equirectangular map rebuilt from the three Apple globe glyphs;
+  the day/night shading is a screen-locked field baked from the same glyph, so
+  the disc matches the emoji at rest and turns as one piece. It starts on the
+  Americas at the glyph's 9.5° tilt and drifts about 0.17 rad/s, with scroll
+  adding speed that eases back.
+- **Globe assets:** `earth-apple.jpg` stores albedo as `sqrt(albedo / 1020)` so
+  eight bits keep the highlights; `globe-shade.png` is the 128 px scalar
+  shading field. `globe-americas.webp` is the still: it shows before the first
+  WebGL frame, under reduced motion, and whenever WebGL is unavailable.
+- **Ladder:** a slow idle sway (±5°, never quite repeating) plus a damped
+  spring that lifts and tilts it when the page moves.
 - **Lanes:** JS-driven so they ease to a stop under the pointer, glide back up,
   and pause for keyboard focus.
-- **Reduced motion:** the globe, ladder and lanes hold still; the sheet becomes
-  a static grid and hover clips do not autoplay.
+- **Reduced motion:** the globe holds a single frame, the ladder and lanes hold
+  still; the sheet becomes a static grid and hover clips do not autoplay.
+- **`intro.html`:** five name treatments (sweeping light, pencil and arrow,
+  curtain, outline to ink, weight wave) kept as a noindex review page. Each
+  row can be replayed.
 
 Emoji renders can be rebuilt with `scripts/render-emoji.swift`.
 
