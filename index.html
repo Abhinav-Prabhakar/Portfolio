@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-variant="a">
+<body>
   <div class="page">
     <main>
 
@@ -20,9 +20,17 @@
         <div class="greeting">
           <p class="greeting__name">Hi, I’m Abhinav Prabhakar</p>
           <p class="greeting__edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
+        </div>
 
-          <!-- review: C — continues the greeting column -->
-          <div class="roles roles--c">
+        <div class="hero__body">
+          <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
+            <span class="hero__line">Making the <span class="emoji emoji--globe" data-globe aria-hidden="true"><canvas class="emoji__canvas" data-globe-canvas width="320" height="320"></canvas><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
+            <span class="hero__line">a better place,</span>
+            <span class="hero__line">one <span class="emoji emoji--ladder" data-ladder aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
+          </h1>
+
+          <!-- the two roles, threaded on one hairline -->
+          <div class="roles roles--b">
             <ol class="roles__list" aria-label="Experience">
               <li class="role">
                 <img class="role__logo" src="assets/img/trovofi.webp" alt="" width="96" height="96">
@@ -39,76 +47,6 @@
                 </div>
               </li>
             </ol>
-          </div>
-        </div>
-
-        <div class="hero__body">
-          <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
-            <span class="hero__line">Making the <span class="emoji emoji--globe" data-globe aria-hidden="true"><canvas class="emoji__canvas" data-globe-canvas width="320" height="320"></canvas><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
-            <span class="hero__line">a better place,</span>
-            <span class="hero__line">one <span class="emoji emoji--ladder" data-ladder aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
-          </h1>
-
-          <div class="hero__rail">
-          <!-- review: A — a quiet column at the top -->
-          <div class="roles roles--a" aria-hidden="true">
-            <ol class="roles__list">
-              <li class="role">
-                <img class="role__logo" src="assets/img/trovofi.webp" alt="" width="96" height="96">
-                <div class="role__body">
-                  <p class="role__title">Founding Engineer</p>
-                  <p class="role__meta">TrovoFi · Feb – Oct 2026</p>
-                </div>
-              </li>
-              <li class="role">
-                <img class="role__logo" src="assets/img/optern.webp" alt="" width="96" height="96">
-                <div class="role__body">
-                  <p class="role__title">Lead Software Engineer</p>
-                  <p class="role__meta">Optern · Aug 2025 – Feb 2026</p>
-                </div>
-              </li>
-            </ol>
-          </div>
-
-          <!-- review: B — threaded on a hairline, in the middle -->
-          <div class="roles roles--b" aria-hidden="true">
-            <ol class="roles__list">
-              <li class="role">
-                <img class="role__logo" src="assets/img/trovofi.webp" alt="" width="96" height="96">
-                <div class="role__body">
-                  <p class="role__title">Founding Engineer</p>
-                  <p class="role__meta">TrovoFi · Feb – Oct 2026</p>
-                </div>
-              </li>
-              <li class="role">
-                <img class="role__logo" src="assets/img/optern.webp" alt="" width="96" height="96">
-                <div class="role__body">
-                  <p class="role__title">Lead Software Engineer</p>
-                  <p class="role__meta">Optern · Aug 2025 – Feb 2026</p>
-                </div>
-              </li>
-            </ol>
-          </div>
-
-          <!-- review: D — the pair side by side, at the bottom -->
-          <div class="roles roles--d" aria-hidden="true">
-            <ol class="roles__list">
-              <li class="role">
-                <img class="role__logo" src="assets/img/trovofi.webp" alt="" width="96" height="96">
-                <div class="role__body">
-                  <p class="role__title">Founding Engineer</p>
-                  <p class="role__meta">TrovoFi · Feb – Oct 2026</p>
-                </div>
-              </li>
-              <li class="role">
-                <img class="role__logo" src="assets/img/optern.webp" alt="" width="96" height="96">
-                <div class="role__body">
-                  <p class="role__title">Lead Software Engineer</p>
-                  <p class="role__meta">Optern · Aug 2025 – Feb 2026</p>
-                </div>
-              </li>
-            </ol>
-          </div>
           </div>
         </div>
       </section>
@@ -137,39 +75,6 @@
 
     </main>
   </div>
-
-  <div class="variants" role="group" aria-label="Placement under review">
-    <span class="variants__label">Placement</span>
-    <button type="button" data-variant="a" aria-pressed="true">A</button>
-    <button type="button" data-variant="b" aria-pressed="false">B</button>
-    <button type="button" data-variant="c" aria-pressed="false">C</button>
-    <button type="button" data-variant="d" aria-pressed="false">D</button>
-  </div>
-
-  <script>
-    /* review only: pick one placement at a time, and keep it in the URL */
-    (() => {
-      const buttons = [...document.querySelectorAll(".variants [data-variant]")];
-      if (!buttons.length) return;
-
-      const apply = (v) => {
-        document.body.dataset.variant = v;
-        buttons.forEach((b) =>
-          b.setAttribute("aria-pressed", String(b.dataset.variant === v))
-        );
-      };
-
-      const start = location.hash.slice(1).toLowerCase();
-      apply(buttons.some((b) => b.dataset.variant === start) ? start : "a");
-
-      buttons.forEach((b) =>
-        b.addEventListener("click", () => {
-          apply(b.dataset.variant);
-          history.replaceState(null, "", `#${b.dataset.variant}`);
-        })
-      );
-    })();
-  </script>
 
   <script src="js/main.js" defer></script>
   <script src="js/work.js" defer></script>

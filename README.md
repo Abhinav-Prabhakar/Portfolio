@@ -94,11 +94,14 @@ image, optional hover clip, aspect ratio and tags. A project without a URL
   row can be replayed.
 - **Experience:** two roles — Founding Engineer at TrovoFi (Feb–Oct 2026) and
   Lead Software Engineer at Optern (Aug 2025–Feb 2026) — told with the company
-  marks rather than prose. Four placements are in the page for review, picked
-  with the switch at the bottom left; only the chosen one survives. Three use
-  a right-hand rail (top, middle, foot), and the fourth continues the greeting
-  column under the university line, which is also the only one a phone gets.
-  The switcher is review chrome and goes with the three unused placements.
+  marks rather than prose. The two marks are threaded on a single 1px hairline
+  beside the statement, level with its middle: a small timeline that echoes the
+  ladder without becoming a diagram. Each mark sits on a paper ring so the line
+  never touches it. Both stay in colour at 90% — the one small accent next to
+  the globe. Below 900px there is no free column, so the pair drops to a static
+  block under the statement and keeps the thread. Optern's supplied logo was
+  the full lockup, so it is cropped to the mark alone; at 26px the wordmark
+  turned to mush and unbalanced the pair.
 - **`place.html`:** the pencil-and-arrow name in four arrangements — above the
   statement, above it without an arrow, signed underneath, and signed
   underneath without an arrow — each with the JNTUH line beneath the name.
