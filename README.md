@@ -1,8 +1,8 @@
 # Portfolio
 
 A small developer portfolio, built in plain HTML, CSS and vanilla JS.
-Material 3 Expressive in spirit: white paper, soft black type, generous
-space, and Apple's emoji as the only colour on the page.
+Material 3 in spirit: white paper, soft black type, generous space, and
+Apple's emoji as the only colour in the hero.
 
 Live at **https://abhinav-prabhakar.github.io/Portfolio/**
 
@@ -18,55 +18,55 @@ python3 -m http.server 4173
 ## What's here
 
 ```
-index.html          hero + work strip
-variants.html       three marquee directions, side by side (a lab page)
-css/style.css       design tokens, layout, surfaces
-css/variants.css    lab page only
-js/main.js          globe turntable, ladder spring, marquee
-js/variants.js      the three directions + their project list
+index.html          hero + selected work
+css/style.css       design tokens, layout, surfaces, the sheet
+js/main.js          globe turntable + ladder spring
+js/work.js          the project list and the drifting lanes
 assets/emoji/       Apple emoji rendered to transparent WebP
-assets/sites/       placeholder screenshots for the strip
+assets/projects/    47 stills + 13 hover loops
 scripts/            asset + screenshot tooling (dev only)
 ```
 
-`variants.html` is a comparison page for picking how the work is presented
-once there are 30+ projects. It is `noindex` and can be deleted once a
-direction is chosen.
+## The work
 
-## The two directions
+Forty-seven projects: every repository that ships a screenshot in its README,
+private work included. Two lanes of bare thumbnails drift against each other
+and loop without a seam. Hover eases a lane to a stop; where the README has a
+GIF, the tile plays it as a muted MP4 loop.
+Keyboard focus stops the lane and centres the focused tile. With reduced motion
+the sheet becomes a static responsive grid.
 
-- **A · Contact sheet** — two lanes of bare thumbnails drifting against each
-  other. Full-bleed, no card chrome, name underneath. Highest density, lowest
-  noise: the whole body of work is legible at a glance.
-- **B · Gallery** — the same 30 shots on black, edge to edge, with no labels.
-  Clicking one zooms the component itself (not the page) into a detail view:
-  image on the left, title, notes and links on the right. Escape or the close
-  button returns the wall.
+Terminal-first tools are left out — this is the visual work.
 
-Both render from the same `PROJECTS` array, so whichever wins can be lifted
-out with its markup intact.
+The project list lives in `PROJECTS` at the top of `js/work.js`: name, live URL,
+image, optional hover clip, aspect ratio and tags. A project without a URL
+(Mantle is private with no public demo) still shows, but its tile is not a link.
+
+## Adding a project
+
+1. Put a still in `assets/projects/` at 1600px wide, JPEG, and add an entry to
+   `PROJECTS`.
+2. If the README has a GIF, convert it to a muted loop and drop it in
+   `assets/projects/video/`:
+   ```sh
+   ffmpeg -i demo.gif -vf "scale='min(800,iw)':-2:flags=lanczos,fps=12" \
+     -c:v libx264 -pix_fmt yuv420p -crf 28 -preset medium \
+     -movflags +faststart -an assets/projects/video/name.mp4
+   ```
+3. Set `video: "name"` on the project. The still doubles as the poster.
 
 ## Notes
 
 - **Type:** Google Sans if installed, otherwise [Figtree](https://fonts.google.com/specimen/Figtree).
 - **Globe:** three Apple globe renders (Americas → Europe–Africa →
   Asia–Australia) are crossfaded as the page scrolls, with a little motion
-  blur and scroll easing. One full revolution over the first screenful of
-  scroll.
+  blur and scroll easing. One full revolution over the first screenful.
 - **Ladder:** a slow idle sway plus a damped spring that lifts and tilts it
   when the page moves.
-- **Marquee:** JS-driven so it decelerates to a stop on hover and glides
-  back up to speed. Keyboard focus pauses it and brings the focused card
-  into view.
-- **Reduced motion:** the globe, ladder and strips hold still; the strips
-  stay scrollable and the focus rail drops its ambient advance.
-
-## Placeholders
-
-The screenshots are real sites that are not mine — swap the `assets/sites/*.jpg`
-files, names and links when the real work is ready. `scripts/fetch-sites.sh`
-regenerates them. In `variants.html` the project list lives in one array at the
-top of `js/variants.js`.
+- **Lanes:** JS-driven so they ease to a stop under the pointer, glide back up,
+  and pause for keyboard focus.
+- **Reduced motion:** the globe, ladder and lanes hold still; the sheet becomes
+  a static grid and hover clips do not autoplay.
 
 Emoji renders can be rebuilt with `scripts/render-emoji.swift`.
 
