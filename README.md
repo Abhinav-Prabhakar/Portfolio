@@ -2,8 +2,6 @@
 
 ![The hero](docs/hero.png)
 
-Plain HTML, CSS and JavaScript. No framework, no build.
-
 ## Run
 
 ```sh
