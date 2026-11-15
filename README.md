@@ -19,6 +19,7 @@ python3 -m http.server 4173
 
 ```
 index.html          hero + selected work
+404.html            the missing rung
 intro.html          noindex review page with five name treatments
 place.html          noindex review page: where the name and the JNTUH line sit
 css/style.css       design tokens, layout, surfaces, the sheet
@@ -107,6 +108,10 @@ image, optional hover clip, aspect ratio and tags. A project without a URL
   a numeral set beside a medal fights the 1/2/3 engraved on it, so the numeral
   leads and the medal becomes the accent. It is a fact about the work, not a
   boast — no switch, no second placement.
+- **404:** a place, not an error. A drawn ladder with one rung left as a dashed
+  absence, one handwritten line and one way back. No header, no footer, no
+  apology; the home page and this are the only two pages. GitHub Pages serves
+  it automatically for any missing path.
 - **`place.html`:** the pencil-and-arrow name in four arrangements — above the
   statement, above it without an arrow, signed underneath, and signed
   underneath without an arrow — each with the JNTUH line beneath the name.

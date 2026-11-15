@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex">
+  <title>This rung isn’t here — Abhinav Prabhakar</title>
+  <link rel="icon" href="/Portfolio/assets/emoji/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #ffffff;
+      --ink: #202124;
+      --ink-soft: #5f6368;
+      --ink-faint: #80868b;
+      --wood: #a97c4e;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: clamp(28px, 7vw, 88px);
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Google Sans", "Figtree", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .missing {
+      display: flex;
+      align-items: center;
+      gap: clamp(28px, 5vw, 48px);
+      max-width: 520px;
+      animation: arrive 0.9s var(--ease) both;
+    }
+
+    @keyframes arrive {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .ladder {
+      flex: none;
+      width: 76px;
+      height: 128px;
+      overflow: visible;
+    }
+
+    .ladder__gap {
+      animation: gap-in 1.4s var(--ease) 0.25s both;
+    }
+
+    @keyframes gap-in {
+      from {
+        opacity: 0;
+        stroke-dashoffset: 16;
+      }
+      to {
+        opacity: 0.45;
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .missing__text {
+      min-width: 0;
+    }
+
+    .missing__code {
+      margin: 0 0 10px;
+      font-size: 10px;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      color: var(--ink-faint);
+    }
+
+    .missing__note {
+      margin: 0;
+      font-family: "Caveat", cursive;
+      font-size: clamp(1.75rem, 4.4vw, 2.25rem);
+      font-weight: 600;
+      line-height: 1.05;
+      color: var(--ink-soft);
+    }
+
+    .missing__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 18px;
+      font-size: 12px;
+      line-height: 1;
+      color: var(--ink-soft);
+      text-decoration: none;
+      background-image: linear-gradient(currentColor, currentColor);
+      background-repeat: no-repeat;
+      background-position: 0 calc(100% + 5px);
+      background-size: 0 1px;
+      transition: background-size 0.35s var(--ease), color 0.35s var(--ease);
+    }
+
+    .missing__back svg {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.35s var(--ease);
+    }
+
+    .missing__back:hover,
+    .missing__back:focus-visible {
+      color: var(--ink);
+      background-size: 100% 1px;
+      outline: none;
+    }
+
+    .missing__back:hover svg,
+    .missing__back:focus-visible svg {
+      transform: translateX(-2px);
+    }
+
+    .missing__back:focus-visible {
+      outline: 1px solid var(--ink-soft);
+      outline-offset: 6px;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 480px) {
+      .missing {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 26px;
+      }
+
+      .ladder {
+        width: 64px;
+        height: 108px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .missing,
+      .ladder__gap {
+        animation: none;
+      }
+
+      .ladder__gap {
+        opacity: 0.45;
+      }
+
+      .missing__back,
+      .missing__back svg {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="missing">
+    <svg class="ladder" viewBox="0 0 76 130" role="img" aria-label="A ladder with one rung missing">
+      <g transform="rotate(-5 38 65)" fill="none" stroke="var(--wood)">
+        <path d="M25 11V119" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M51 11V119" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M25 25H51" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M25 46H51" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M25 88H51" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M25 109H51" stroke-width="2.8" stroke-linecap="round"/>
+        <path class="ladder__gap" d="M25 67H51" stroke-width="2.3" stroke-linecap="round"
+          stroke-dasharray="3 5" opacity="0.45"/>
+      </g>
+    </svg>
+
+    <div class="missing__text">
+      <p class="missing__code">404</p>
+      <p class="missing__note">This rung isn’t here.</p>
+      <a class="missing__back" href="/Portfolio/">
+        <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M10 6H2M5 3 2 6l3 3" stroke="currentColor" stroke-width="1.3"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to the ladder
+      </a>
+    </div>
+  </main>
+</body>
+</html>
