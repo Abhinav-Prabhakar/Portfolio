@@ -18,6 +18,7 @@
   --radius-shot: 22px;
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-settle: cubic-bezier(0.34, 1.4, 0.64, 1);
   --font: "Google Sans", "Google Sans Text", "Figtree", "Segoe UI", system-ui,
     -apple-system, "Helvetica Neue", Arial, sans-serif;
   --shadow-1: 0 1px 2px rgba(32, 33, 36, 0.04),
@@ -58,6 +59,27 @@ body {
 :focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
+}
+
+/* ---------- press ----------
+   Every clickable dips under the finger and springs back. The dip is
+   anchored where the pointer landed, not at the centre, so the control
+   reads as a solid object being pushed rather than a shape scaling in
+   place. Nothing here is visible until someone actually presses. */
+
+[data-pressing] {
+  --press: 0.988;
+  --press-t: 0.1s;
+}
+
+/* the dip is proportional to the surface, so a small control sinks as far
+   as a large one in absolute pixels */
+.footer__link[data-pressing] {
+  --press: 0.97;
+}
+
+.variants button[data-pressing] {
+  --press: 0.9;
 }
 
 .sr-only {
@@ -308,175 +330,6 @@ body {
   display: block;
   width: 18px;
   height: 18px;
-}
-
-/* ---------- leetcode rating ----------
-   One quiet line, in the page's own voice: the label at the faintest ink,
-   the number one step darker. No chart, no accent, nothing that competes
-   with the statement. Eight homes for that line, under review. */
-
-.lc {
-  display: none;
-  align-items: baseline;
-  gap: 6px;
-  white-space: nowrap;
-}
-
-.lc__num {
-  margin: 0;
-  font-size: 11px;
-  line-height: 1;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.005em;
-  color: var(--ink-soft);
-}
-
-.lc__cap {
-  margin: 0;
-  font-size: 10px;
-  line-height: 1;
-  letter-spacing: 0.015em;
-  color: var(--ink-faint);
-}
-
-/* 1 — at the foot of the hero, against the right gutter */
-.lc--1 {
-  position: absolute;
-  right: var(--gutter);
-  bottom: clamp(20px, 3.6vh, 44px);
-}
-
-/* 2 — opposite the greeting, on its first line */
-.lc--2 {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-/* 3 — under the roles */
-.lc--3 {
-  position: absolute;
-  top: calc(100% + 16px);
-  left: 0;
-}
-
-/* 4 — a second line under the credential */
-.lc--4 {
-  margin-top: 7px;
-}
-
-/* 5 — inline on the credential, after a hairline */
-.lc--5 {
-  align-items: center;
-  gap: 7px;
-}
-
-.lc--5 .lc__sep {
-  width: 1px;
-  height: 10px;
-  background: rgba(32, 33, 36, 0.16);
-}
-
-/* 6 — under the project count, in the work head */
-.lc--6 {
-  margin-top: 8px;
-  justify-content: flex-end;
-}
-
-/* 7 — under the section title */
-.lc--7 {
-  margin-top: 9px;
-}
-
-/* 8 — in the footer */
-.lc--8 {
-  align-self: center;
-}
-
-/* ---------- the rating switch (review only) ---------- */
-
-.variants {
-  position: fixed;
-  left: var(--gutter);
-  bottom: 16px;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  gap: 1px;
-  padding: 4px 5px 4px 10px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 1px 2px rgba(32, 33, 36, 0.05),
-    0 12px 26px -18px rgba(32, 33, 36, 0.4);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
-
-.variants__label {
-  margin-right: 4px;
-  font-size: 10.5px;
-  letter-spacing: 0.02em;
-  color: var(--ink-faint);
-}
-
-.variants button {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  font: inherit;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--ink-faint);
-  cursor: pointer;
-  transition: color 0.2s var(--ease), background-color 0.2s var(--ease);
-}
-
-.variants button:hover {
-  color: var(--ink);
-}
-
-.variants button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-/* one treatment at a time */
-body[data-lc="1"] .lc--1,
-body[data-lc="2"] .lc--2,
-body[data-lc="3"] .lc--3,
-body[data-lc="4"] .lc--4,
-body[data-lc="6"] .lc--6,
-body[data-lc="7"] .lc--7,
-body[data-lc="8"] .lc--8 {
-  display: flex;
-}
-
-body[data-lc="5"] .lc--5 {
-  display: inline-flex;
-}
-
-@media (max-width: 900px) {
-  /* no review chrome, and only the inline line: it adds no row, so the
-     statement keeps its place */
-  .variants,
-  .lc--1,
-  .lc--2,
-  .lc--3,
-  .lc--4,
-  .lc--6,
-  .lc--7,
-  .lc--8 {
-    display: none !important;
-  }
-
-  .lc--5 {
-    display: inline-flex !important;
-  }
 }
 
 .hero__line {
@@ -795,7 +648,10 @@ body[data-lc="5"] .lc--5 {
   gap: 5px;
   color: var(--ink-soft);
   text-decoration: none;
-  transition: color 0.3s var(--ease);
+  scale: var(--press, 1);
+  transform-origin: var(--ox, 50%) var(--oy, 50%);
+  transition: color 0.3s var(--ease),
+    scale var(--press-t, 0.24s) var(--ease-settle);
 }
 
 .footer__link svg {

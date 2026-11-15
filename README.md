@@ -107,16 +107,6 @@ image, optional hover clip, aspect ratio and tags. A project without a URL
   a numeral set beside a medal fights the 1/2/3 engraved on it, so the numeral
   leads and the medal becomes the accent. It is a fact about the work, not a
   boast — no switch, no second placement.
-- **Rating:** the LeetCode contest rating as one faint line — “LeetCode 1,852”
-  at 10–11 px, in the same grey as the rest of the page's metadata. No gauge,
-  ruler or dial: the number is the whole mark, and it never competes with the
-  statement. Eight homes are in the page for review (hero foot, opposite the
-  greeting, under the roles, under the credential, inline on it, under the
-  project count, under “Selected work”, and in the footer); pick one with the
-  Rating switch or the `1`–`8` keys, and the choice rides in the URL hash. The
-  default is `5`, the inline line, because it adds no row. Below 900 px that
-  inline line is the only one. `1,852` is a placeholder; set the real rating
-  and profile URL before launch.
 - **`place.html`:** the pencil-and-arrow name in four arrangements — above the
   statement, above it without an arrow, signed underneath, and signed
   underneath without an arrow — each with the JNTUH line beneath the name.

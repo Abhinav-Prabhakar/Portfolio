@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-lc="5">
+<body>
   <div class="page">
     <main>
 
@@ -20,23 +20,7 @@
         <div class="hero__top">
           <div class="greeting">
             <p class="greeting__name">Hi, I’m Abhinav Prabhakar</p>
-            <p class="greeting__edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML<span class="lc lc--5">
-              <span class="lc__sep" aria-hidden="true"></span>
-              <span class="lc__cap">LeetCode</span>
-              <span class="lc__num">1,852</span>
-            </span></p>
-
-            <!-- review: rating 4 — a second line under the credential -->
-            <div class="lc lc--4">
-              <p class="lc__cap">LeetCode</p>
-              <p class="lc__num">1,852</p>
-            </div>
-          </div>
-
-          <!-- review: rating 2 — opposite the greeting -->
-          <div class="lc lc--2">
-            <p class="lc__cap">LeetCode</p>
-            <p class="lc__num">1,852</p>
+            <p class="greeting__edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
           </div>
         </div>
 
@@ -66,33 +50,13 @@
                 </li>
               </ol>
             </div>
-
-            <!-- review: rating 3 — under the roles -->
-            <div class="lc lc--3">
-              <p class="lc__cap">LeetCode</p>
-              <p class="lc__num">1,852</p>
-            </div>
           </div>
-        </div>
-
-        <!-- review: rating 1 — at the foot of the hero -->
-        <div class="lc lc--1">
-          <p class="lc__cap">LeetCode</p>
-          <p class="lc__num">1,852</p>
         </div>
       </section>
 
       <section class="work" aria-labelledby="work-heading">
         <div class="work__head">
-          <div class="work__lead">
-            <h2 class="work__title" id="work-heading">Selected work</h2>
-
-            <!-- review: rating 7 — under the section title -->
-            <div class="lc lc--7">
-              <p class="lc__cap">LeetCode</p>
-              <p class="lc__num">1,852</p>
-            </div>
-          </div>
+          <h2 class="work__title" id="work-heading">Selected work</h2>
           <div class="work__stats">
             <p class="work__count" data-count>47 projects</p>
 
@@ -103,12 +67,6 @@
                 <li class="hackathons__pair"><span class="hackathons__n">1</span><img class="hackathons__icon" src="assets/emoji/medal-silver.webp" alt="" width="160" height="160"></li>
                 <li class="hackathons__pair"><span class="hackathons__n">1</span><img class="hackathons__icon" src="assets/emoji/medal-bronze.webp" alt="" width="160" height="160"></li>
               </ul>
-            </div>
-
-            <!-- review: rating 6 — under the project count -->
-            <div class="lc lc--6">
-              <p class="lc__cap">LeetCode</p>
-              <p class="lc__num">1,852</p>
             </div>
           </div>
         </div>
@@ -122,12 +80,6 @@
 
       <footer class="footer">
         <p class="footer__note">&copy; 2026 Abhinav Prabhakar</p>
-
-        <!-- review: rating 8 — in the footer -->
-        <div class="lc lc--8">
-          <p class="lc__cap">LeetCode</p>
-          <p class="lc__num">1,852</p>
-        </div>
         <a class="footer__link" href="https://github.com/Abhinav-Prabhakar" target="_blank" rel="noopener">
           GitHub
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -137,48 +89,6 @@
     </main>
   </div>
 
-
-  <div class="variants" role="group" aria-label="Rating treatment under review">
-    <span class="variants__label">Rating</span>
-    <button type="button" data-lc="1" aria-pressed="false" aria-keyshortcuts="1">1</button>
-    <button type="button" data-lc="2" aria-pressed="false" aria-keyshortcuts="2">2</button>
-    <button type="button" data-lc="3" aria-pressed="false" aria-keyshortcuts="3">3</button>
-    <button type="button" data-lc="4" aria-pressed="false" aria-keyshortcuts="4">4</button>
-    <button type="button" data-lc="5" aria-pressed="true" aria-keyshortcuts="5">5</button>
-    <button type="button" data-lc="6" aria-pressed="false" aria-keyshortcuts="6">6</button>
-    <button type="button" data-lc="7" aria-pressed="false" aria-keyshortcuts="7">7</button>
-    <button type="button" data-lc="8" aria-pressed="false" aria-keyshortcuts="8">8</button>
-  </div>
-
-  <script>
-    /* review only: one rating treatment at a time. Pick with the switch, the
-       1–4 keys, or a hash. */
-    (() => {
-      const buttons = [...document.querySelectorAll(".variants [data-lc]")];
-      if (!buttons.length) return;
-
-      const pick = (v) => {
-        document.body.dataset.lc = v;
-        buttons.forEach((b) =>
-          b.setAttribute("aria-pressed", String(b.dataset.lc === v))
-        );
-        history.replaceState(null, "", `#${v}`);
-      };
-
-      const start = location.hash.slice(1);
-      pick(buttons.some((b) => b.dataset.lc === start) ? start : "5");
-
-      buttons.forEach((b) =>
-        b.addEventListener("click", () => pick(b.dataset.lc))
-      );
-
-      document.addEventListener("keydown", (e) => {
-        if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
-        if (!/^[1-8]$/.test(e.key)) return;
-        pick(e.key);
-      });
-    })();
-  </script>
 
   <script src="js/main.js" defer></script>
   <script src="js/work.js" defer></script>
