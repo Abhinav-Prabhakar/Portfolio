@@ -10,7 +10,14 @@
   --ink-soft: #5f6368;
   --ink-faint: #9aa0a6;
   --paper: #ffffff;
+  --surface: #f1f1f2;
   --line: rgba(32, 33, 36, 0.07);
+  --thread: rgba(32, 33, 36, 0.18);
+  /* light text is read as lighter than it is; on dark paper the strokes
+     thin out, so every weight is nudged up by a fortieth of the scale —
+     enough to hold their edge, not enough to become a bold face */
+  --w-text: 400;
+  --w-med: 500;
   --gutter: clamp(20px, 5vw, 64px);
   --gap: clamp(14px, 1.5vw, 24px);
   --tile-gap: clamp(10px, 1vw, 16px);
@@ -21,12 +28,61 @@
   --ease-settle: cubic-bezier(0.34, 1.4, 0.64, 1);
   --font: "Google Sans", "Google Sans Text", "Figtree", "Segoe UI", system-ui,
     -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --shot-shadow: 0 1px 2px rgba(32, 33, 36, 0.06),
+    0 14px 30px -20px rgba(32, 33, 36, 0.42);
   --shadow-1: 0 1px 2px rgba(32, 33, 36, 0.04),
     0 8px 20px -10px rgba(32, 33, 36, 0.12),
     0 26px 48px -30px rgba(32, 33, 36, 0.14);
   --shadow-2: 0 2px 4px rgba(32, 33, 36, 0.05),
     0 16px 34px -12px rgba(32, 33, 36, 0.18),
     0 44px 70px -36px rgba(32, 33, 36, 0.2);
+}
+
+/* ---------- dark paper ----------
+   The same sheet, turned over. Paper and ink trade places, but not evenly:
+   pure black against pure white is a harsh edge, so the paper sits at
+   Google's #202124 and the ink just short of white. Surfaces lift with a
+   little more grey than the page, exactly as they fall darker than it in
+   daylight. Shadows go to true black and get softer, because on dark paper
+   elevation is read from the glow around an edge, not the drop below it. */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e8eaed;
+  --ink-soft: #bdc1c6;
+  --ink-faint: #9aa0a6;
+  --paper: #202124;
+  --surface: #303134;
+  --line: rgba(232, 234, 237, 0.1);
+  --thread: rgba(232, 234, 237, 0.22);
+  --w-text: 440;
+  --w-med: 540;
+  --shot-shadow: 0 1px 2px rgba(0, 0, 0, 0.55),
+    0 16px 34px -18px rgba(0, 0, 0, 0.9);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4),
+    0 8px 20px -10px rgba(0, 0, 0, 0.55),
+    0 26px 48px -30px rgba(0, 0, 0, 0.6);
+  --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.5),
+    0 16px 34px -12px rgba(0, 0, 0, 0.7),
+    0 44px 70px -36px rgba(0, 0, 0, 0.8);
+}
+
+/* ---------- turning the page ----------
+   One dissolve for the whole sheet. The surface leads and the ink follows
+   just behind it, so no element snaps while the paper changes; the type
+   thickens on the same clock it would have needed anyway. The class only
+   lives for the length of the change, so hover states are untouched. */
+
+html.is-theming {
+  transition: background-color 0.26s var(--ease);
+}
+
+html.is-theming * {
+  transition: background-color 0.26s var(--ease), color 0.2s var(--ease),
+    border-color 0.26s var(--ease), box-shadow 0.26s var(--ease),
+    fill 0.26s var(--ease), stroke 0.26s var(--ease),
+    font-weight 0.26s var(--ease), scale 0.26s var(--ease-settle),
+    translate 0.26s var(--ease-out);
 }
 
 *,
@@ -36,6 +92,7 @@
 }
 
 html {
+  background: var(--paper);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -44,7 +101,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font);
-  font-weight: 400;
+  font-weight: var(--w-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -121,7 +178,7 @@ body {
 .hero__title {
   margin: 0;
   font-size: clamp(2.45rem, 7vw, 7.5rem);
-  font-weight: 500;
+  font-weight: var(--w-med);
   line-height: 1.03;
   letter-spacing: -0.038em;
   text-wrap: balance;
@@ -260,7 +317,7 @@ body {
   top: -16px;
   bottom: -16px;
   width: 1px;
-  background: rgba(32, 33, 36, 0.18);
+  background: var(--thread);
 }
 
 /* the paper ring lifts the marks off the thread */
@@ -317,7 +374,7 @@ body {
 .hackathons__n {
   font-size: 12px;
   line-height: 1;
-  font-weight: 500;
+  font-weight: var(--w-med);
   font-variant-numeric: tabular-nums;
   color: var(--ink-soft);
 }
@@ -391,6 +448,44 @@ body {
 
 .emoji--globe {
   margin-inline: 0.02em 0.04em;
+  /* the globe is the theme switch: a button, stripped back to the glyph */
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  line-height: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  scale: var(--press, 1);
+  transform-origin: var(--ox, 50%) var(--oy, 50%);
+  transition: scale var(--press-t, 0.24s) var(--ease-settle);
+}
+
+/* the wrapper is zero-height and the art hangs below the baseline, so the
+   ring is drawn round the glyph itself rather than round the empty box */
+.emoji--globe:focus-visible {
+  outline: none;
+}
+
+.emoji--globe:focus-visible::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.114em;
+  width: 0.985em;
+  height: 0.985em;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.emoji--globe[data-pressing] {
+  --press: 0.96;
 }
 
 .emoji__canvas {
@@ -446,7 +541,7 @@ body {
 .work__title {
   margin: 0;
   font-size: 0.85rem;
-  font-weight: 400;
+  font-weight: var(--w-text);
   letter-spacing: 0;
   color: var(--ink-faint);
 }
@@ -532,9 +627,8 @@ body {
   aspect-ratio: 17 / 10;
   overflow: hidden;
   border-radius: clamp(14px, 1.3vw, 20px);
-  background: #f1f1f2;
-  box-shadow: 0 1px 2px rgba(32, 33, 36, 0.06),
-    0 14px 30px -20px rgba(32, 33, 36, 0.42);
+  background: var(--surface);
+  box-shadow: var(--shot-shadow);
   /* lift and press are separate properties, so a finger landing on a tile
      never cancels the hover lift it is already sitting on */
   translate: 0 0;
@@ -582,7 +676,7 @@ body {
   padding-top: 8px;
   font-size: 0.88rem;
   line-height: 1.15;
-  font-weight: 500;
+  font-weight: var(--w-med);
   letter-spacing: -0.008em;
   color: var(--ink-soft);
   transition: color 0.3s var(--ease);

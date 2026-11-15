@@ -4,13 +4,56 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
+  <script>
+    /* the last theme chosen, if any — a first visit always opens on paper.
+       The system preference is deliberately not consulted. */
+    try {
+      if (localStorage.getItem("theme") === "dark")
+        document.documentElement.dataset.theme = "dark";
+    } catch (e) {}
+  </script>
   <title>Making the world a better place, one ladder at a time.</title>
-  <meta name="description" content="A developer portfolio. Making the world a better place, one ladder at a time.">
-  <link rel="icon" href="assets/emoji/favicon.png">
+  <meta name="description" content="Abhinav Prabhakar — developer. Making the world a better place, one ladder at a time.">
+  <meta name="author" content="Abhinav Prabhakar">
+  <link rel="canonical" href="https://abhinav-prabhakar.github.io/Portfolio/">
+  <link rel="me" href="https://github.com/Abhinav-Prabhakar">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/emoji/favicon.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Abhinav Prabhakar">
+  <meta property="og:title" content="Making the world a better place, one ladder at a time.">
+  <meta property="og:description" content="Abhinav Prabhakar — developer.">
+  <meta property="og:url" content="https://abhinav-prabhakar.github.io/Portfolio/">
+  <meta property="og:image" content="https://abhinav-prabhakar.github.io/Portfolio/assets/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The hero: “Making the world a better place, one ladder at a time.”">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Making the world a better place, one ladder at a time.">
+  <meta name="twitter:description" content="Abhinav Prabhakar — developer.">
+  <meta name="twitter:image" content="https://abhinav-prabhakar.github.io/Portfolio/assets/og.png">
+  <meta name="twitter:image:alt" content="The hero: “Making the world a better place, one ladder at a time.”">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Abhinav Prabhakar",
+      "url": "https://abhinav-prabhakar.github.io/Portfolio/",
+      "image": "https://abhinav-prabhakar.github.io/Portfolio/assets/og.png",
+      "description": "Making the world a better place, one ladder at a time.",
+      "sameAs": ["https://github.com/Abhinav-Prabhakar"]
+    }
+  </script>
 </head>
 <body>
   <div class="page">
@@ -26,7 +69,7 @@
 
         <div class="hero__body">
           <h1 class="hero__title" aria-label="Making the world a better place, one ladder at a time.">
-            <span class="hero__line">Making the <span class="emoji emoji--globe" data-globe aria-hidden="true"><canvas class="emoji__canvas" data-globe-canvas width="320" height="320"></canvas><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160"></span></span>
+            <span class="hero__line">Making the <button class="emoji emoji--globe" type="button" data-globe data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme"><canvas class="emoji__canvas" data-globe-canvas width="320" height="320" aria-hidden="true"></canvas><img src="assets/emoji/globe-americas.webp" alt="" width="160" height="160" aria-hidden="true"></button></span>
             <span class="hero__line">a better place,</span>
             <span class="hero__line">one <span class="emoji emoji--ladder" data-ladder aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
           </h1>
