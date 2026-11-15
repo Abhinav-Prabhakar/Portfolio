@@ -21,6 +21,11 @@
   /* the Americas face of Apple's 🌎 */
   const START_ANGLE = (-78.5 * Math.PI) / 180;
 
+  /* a kick of spin, spent on the next frame — the globe gives a slow
+     quarter-turn when it is pressed */
+  let spinKick = 0;
+  let wakeGlobe = () => {};
+
   /* ---------------- globe ---------------- */
 
   const VERT = `
@@ -208,6 +213,10 @@
           const goal = idle;
           spin += (goal - spin) * (1 - Math.exp(-dt * 4));
           scrollBoost *= Math.exp(-dt * 3.2);
+          if (spinKick) {
+            scrollBoost = clamp(scrollBoost + spinKick, -6, 6);
+            spinKick = 0;
+          }
 
           angle += (spin + scrollBoost) * dt;
           draw();
@@ -221,6 +230,11 @@
           running = true;
           previous = performance.now();
           requestAnimationFrame(frame);
+        };
+
+        wakeGlobe = () => {
+          spinKick += 1.4;
+          start();
         };
 
         window.addEventListener(
@@ -365,6 +379,62 @@
   }
 
   if (ladder && !reduceMotion.matches) startLadder();
+
+  /* ---------------- theme ----------------
+     The globe is the switch. Paper is the default, always — nothing is
+     read from the system, only from what the reader last chose. The change
+     is one dissolve (see .is-theming) with the surface leading the ink, so
+     nothing snaps while the sheet turns. */
+
+  const root = document.documentElement;
+  const themeButton = $("[data-theme-toggle]");
+  const themeMeta = $('meta[name="theme-color"]');
+  let theming = 0;
+
+  const storedTheme = () => {
+    try {
+      return localStorage.getItem("theme");
+    } catch (err) {
+      return null;
+    }
+  };
+
+  const paint = (dark) => {
+    if (dark) root.dataset.theme = "dark";
+    else delete root.dataset.theme;
+
+    if (themeMeta) {
+      themeMeta.setAttribute("content", dark ? "#202124" : "#ffffff");
+    }
+
+    if (themeButton) {
+      const label = dark ? "Switch to light theme" : "Switch to dark theme";
+      themeButton.setAttribute("aria-label", label);
+      themeButton.setAttribute("title", label);
+    }
+  };
+
+  if (themeButton) {
+    paint(storedTheme() === "dark");
+
+    themeButton.addEventListener("click", () => {
+      const dark = root.dataset.theme !== "dark";
+
+      /* the class outlives the change by a hair, then the page goes back
+         to its ordinary transitions */
+      root.classList.add("is-theming");
+      clearTimeout(theming);
+      theming = setTimeout(() => root.classList.remove("is-theming"), 320);
+
+      paint(dark);
+
+      try {
+        localStorage.setItem("theme", dark ? "dark" : "light");
+      } catch (err) {}
+
+      if (!reduceMotion.matches) wakeGlobe();
+    });
+  }
 
   /* ---------------- press ----------------
      Every clickable dips under the finger and springs back. The dip is

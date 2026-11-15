@@ -6,6 +6,14 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light">
   <meta name="robots" content="noindex">
+  <script>
+    try {
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.dataset.theme = "dark";
+        document.querySelector('meta[name="theme-color"]').content = "#202124";
+      }
+    } catch (e) {}
+  </script>
   <title>This rung isn’t here — Abhinav Prabhakar</title>
   <link rel="icon" href="/Portfolio/assets/emoji/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +27,15 @@
       --ink-faint: #80868b;
       --wood: #a97c4e;
       --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --paper: #202124;
+      --ink: #e8eaed;
+      --ink-soft: #bdc1c6;
+      --ink-faint: #9aa0a6;
+      --wood: #c89a68;
     }
 
     * {
