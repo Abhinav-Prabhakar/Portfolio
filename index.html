@@ -12,16 +12,48 @@
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-wins="a">
+<body data-lc="1">
   <div class="page">
     <main>
 
       <section class="hero">
-        <div class="greeting">
-          <p class="greeting__name">Hi, I’m Abhinav Prabhakar</p>
-          <p class="greeting__edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
-          <!-- review: wins A — a pencil note under the greeting -->
-          <p class="wins wins--a" aria-label="Hackathons: three gold, two silver, one bronze">hackathons: 3 gold, 2 silver, 1 bronze</p>
+        <div class="hero__top">
+          <div class="greeting">
+            <p class="greeting__name">Hi, I’m Abhinav Prabhakar</p>
+            <p class="greeting__edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
+
+            <!-- review: rating 4 — a level strip under the JNTUH line -->
+            <div class="lc lc--4">
+              <p class="lc__cap">LeetCode</p>
+              <p class="lc__num">1,852</p>
+              <ul class="levels" aria-hidden="true">
+                <li class="levels__b is-on"></li>
+                <li class="levels__b is-on"></li>
+                <li class="levels__b is-on"></li>
+                <li class="levels__b is-here"></li>
+                <li class="levels__b"></li>
+                <li class="levels__b"></li>
+                <li class="levels__b"></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- review: rating 2 — the league ruler, opposite the greeting -->
+          <div class="lc lc--2" style="--p: 71.2">
+            <p class="lc__cap">LeetCode</p>
+            <p class="lc__num">1,852</p>
+            <div class="ruler" aria-hidden="true">
+              <span class="ruler__tick" style="left: 53.85%"></span>
+              <span class="ruler__tick" style="left: 61.54%"></span>
+              <span class="ruler__tick" style="left: 69.23%"></span>
+              <span class="ruler__band"></span>
+              <span class="ruler__tick" style="left: 76.92%"></span>
+              <span class="ruler__tick" style="left: 84.62%"></span>
+              <span class="ruler__tick" style="left: 92.31%"></span>
+              <span class="ruler__stem"></span>
+              <span class="ruler__mark"></span>
+            </div>
+          </div>
         </div>
 
         <div class="hero__body">
@@ -31,52 +63,67 @@
             <span class="hero__line">one <span class="emoji emoji--ladder" data-ladder aria-hidden="true"><img src="assets/emoji/ladder.webp" alt="" width="160" height="160"></span> at a time.</span>
           </h1>
 
-          <!-- the two roles, threaded on one hairline -->
-          <div class="roles roles--b">
-            <ol class="roles__list" aria-label="Experience">
-              <li class="role">
-                <img class="role__logo" src="assets/img/trovofi.webp" alt="" width="96" height="96">
-                <div class="role__body">
-                  <p class="role__title">Founding Engineer</p>
-                  <p class="role__meta">TrovoFi · Feb – Oct 2026</p>
-                </div>
-              </li>
-              <li class="role">
-                <img class="role__logo" src="assets/img/optern.webp" alt="" width="96" height="96">
-                <div class="role__body">
-                  <p class="role__title">Lead Software Engineer</p>
-                  <p class="role__meta">Optern · Aug 2025 – Feb 2026</p>
-                </div>
-              </li>
-            </ol>
-          </div>
+          <div class="hero__rail">
+            <div class="roles roles--b">
+              <ol class="roles__list" aria-label="Experience">
+                <li class="role">
+                  <img class="role__logo" src="assets/img/trovofi.webp" alt="" width="96" height="96">
+                  <div class="role__body">
+                    <p class="role__title">Founding Engineer</p>
+                    <p class="role__meta">TrovoFi · Feb – Oct 2026</p>
+                  </div>
+                </li>
+                <li class="role">
+                  <img class="role__logo" src="assets/img/optern.webp" alt="" width="96" height="96">
+                  <div class="role__body">
+                    <p class="role__title">Lead Software Engineer</p>
+                    <p class="role__meta">Optern · Aug 2025 – Feb 2026</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
 
-          <!-- review: wins B — a small ledger under the thread -->
-          <div class="wins wins--b">
-            <p class="wins__cap">Hackathons</p>
-            <ul class="wins__list" aria-label="Hackathons: three gold, two silver, one bronze">
-              <li class="win win--gold"><span class="win__n">3</span><span class="win__k">gold</span></li>
-              <li class="win win--silver"><span class="win__n">2</span><span class="win__k">silver</span></li>
-              <li class="win win--bronze"><span class="win__n">1</span><span class="win__k">bronze</span></li>
-            </ul>
+            <!-- review: rating 3 — the dial under the roles -->
+            <div class="lc lc--3">
+              <div class="dial">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path class="dial__track" d="M 12.2 51.8 A 28 28 0 1 1 51.8 51.8"></path>
+                  <path class="dial__value" pathLength="100" d="M 12.2 51.8 A 28 28 0 1 1 51.8 51.8" style="stroke-dasharray: 71.2 100"></path>
+                </svg>
+                <span class="dial__num">1,852</span>
+              </div>
+              <p class="lc__cap">LeetCode rating</p>
+            </div>
           </div>
         </div>
 
-        <!-- review: wins C — medals at the foot of the hero -->
-        <div class="wins wins--c">
-          <p class="wins__cap">Hackathons</p>
-          <ul class="wins__list" aria-label="Hackathons: three gold, two silver, one bronze">
-            <li class="win win--gold"><span class="win__n">3</span></li>
-            <li class="win win--silver"><span class="win__n">2</span></li>
-            <li class="win win--bronze"><span class="win__n">1</span></li>
-          </ul>
+        <!-- review: rating 1 — the climb, at the foot of the hero -->
+        <div class="lc lc--1" style="--p: 71.2">
+          <div class="climb">
+            <span class="climb__mark" aria-hidden="true"></span>
+            <div class="lc__readout">
+              <p class="lc__num">1,852</p>
+              <p class="lc__cap">LeetCode</p>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="work" aria-labelledby="work-heading">
         <div class="work__head">
           <h2 class="work__title" id="work-heading">Selected work</h2>
-          <p class="work__count" data-count>47 projects</p>
+          <div class="work__stats">
+            <p class="work__count" data-count>47 projects</p>
+
+            <div class="hackathons" aria-label="Hackathons: 3 gold, 1 silver, 1 bronze">
+              <p class="hackathons__cap">Hackathons</p>
+              <ul class="hackathons__list">
+                <li class="hackathons__pair"><span class="hackathons__n">3</span><img class="hackathons__icon" src="assets/emoji/medal-gold.webp" alt="" width="160" height="160"></li>
+                <li class="hackathons__pair"><span class="hackathons__n">1</span><img class="hackathons__icon" src="assets/emoji/medal-silver.webp" alt="" width="160" height="160"></li>
+                <li class="hackathons__pair"><span class="hackathons__n">1</span><img class="hackathons__icon" src="assets/emoji/medal-bronze.webp" alt="" width="160" height="160"></li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <div class="sheet" data-sheet>
@@ -88,7 +135,6 @@
 
       <footer class="footer">
         <p class="footer__note">&copy; 2026 Abhinav Prabhakar</p>
-        <p class="wins wins--d">Three gold, two silver and one bronze at hackathons.</p>
         <a class="footer__link" href="https://github.com/Abhinav-Prabhakar" target="_blank" rel="noopener">
           GitHub
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -99,36 +145,41 @@
   </div>
 
 
-  <div class="variants" role="group" aria-label="Wins treatment under review">
-    <span class="variants__label">Wins</span>
-    <button type="button" data-wins="a" aria-pressed="true">A</button>
-    <button type="button" data-wins="b" aria-pressed="false">B</button>
-    <button type="button" data-wins="c" aria-pressed="false">C</button>
-    <button type="button" data-wins="d" aria-pressed="false">D</button>
+  <div class="variants" role="group" aria-label="Rating treatment under review">
+    <span class="variants__label">Rating</span>
+    <button type="button" data-lc="1" aria-pressed="true" aria-keyshortcuts="1">1</button>
+    <button type="button" data-lc="2" aria-pressed="false" aria-keyshortcuts="2">2</button>
+    <button type="button" data-lc="3" aria-pressed="false" aria-keyshortcuts="3">3</button>
+    <button type="button" data-lc="4" aria-pressed="false" aria-keyshortcuts="4">4</button>
   </div>
 
   <script>
-    /* review only: one wins treatment at a time, remembered in the URL */
+    /* review only: one rating treatment at a time. Pick with the switch, the
+       1–4 keys, or a hash. */
     (() => {
-      const buttons = [...document.querySelectorAll(".variants [data-wins]")];
+      const buttons = [...document.querySelectorAll(".variants [data-lc]")];
       if (!buttons.length) return;
 
-      const apply = (v) => {
-        document.body.dataset.wins = v;
+      const pick = (v) => {
+        document.body.dataset.lc = v;
         buttons.forEach((b) =>
-          b.setAttribute("aria-pressed", String(b.dataset.wins === v))
+          b.setAttribute("aria-pressed", String(b.dataset.lc === v))
         );
+        history.replaceState(null, "", `#${v}`);
       };
 
-      const start = location.hash.slice(1).toLowerCase();
-      apply(buttons.some((b) => b.dataset.wins === start) ? start : "a");
+      const start = location.hash.slice(1);
+      pick(buttons.some((b) => b.dataset.lc === start) ? start : "1");
 
       buttons.forEach((b) =>
-        b.addEventListener("click", () => {
-          apply(b.dataset.wins);
-          history.replaceState(null, "", `#${b.dataset.wins}`);
-        })
+        b.addEventListener("click", () => pick(b.dataset.lc))
       );
+
+      document.addEventListener("keydown", (e) => {
+        if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
+        if (!/^[1-4]$/.test(e.key)) return;
+        pick(e.key);
+      });
     })();
   </script>
 

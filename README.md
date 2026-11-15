@@ -102,6 +102,14 @@ image, optional hover clip, aspect ratio and tags. A project without a URL
   block under the statement and keeps the thread. Optern's supplied logo was
   the full lockup, so it is cropped to the mark alone; at 26px the wordmark
   turned to mush and unbalanced the pair.
+- **Hackathons:** the gold, silver and bronze counts, told as numbers rather
+  than one medal per win. Forty-odd wins would need forty-odd glyphs, and a
+  numeral set beside a medal fights the 1/2/3 engraved on it, so the numeral
+  leads and the medal becomes the accent. Four treatments are in the page for
+  review: a measured row at the foot of the hero, three proportional bars
+  opposite the greeting, a stacked count under the roles, and one quiet line in
+  the work head. Pick one with the Wins switch or the `1`–`4` keys; the choice
+  rides in the URL hash. Below 900 px only the measured row remains.
 - **`place.html`:** the pencil-and-arrow name in four arrangements — above the
   statement, above it without an arrow, signed underneath, and signed
   underneath without an arrow — each with the JNTUH line beneath the name.
