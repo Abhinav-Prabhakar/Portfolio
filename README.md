@@ -102,14 +102,21 @@ image, optional hover clip, aspect ratio and tags. A project without a URL
   block under the statement and keeps the thread. Optern's supplied logo was
   the full lockup, so it is cropped to the mark alone; at 26px the wordmark
   turned to mush and unbalanced the pair.
-- **Hackathons:** the gold, silver and bronze counts, told as numbers rather
-  than one medal per win. Forty-odd wins would need forty-odd glyphs, and a
-  numeral set beside a medal fights the 1/2/3 engraved on it, so the numeral
-  leads and the medal becomes the accent. Four treatments are in the page for
-  review: a measured row at the foot of the hero, three proportional bars
-  opposite the greeting, a stacked count under the roles, and one quiet line in
-  the work head. Pick one with the Wins switch or the `1`–`4` keys; the choice
-  rides in the URL hash. Below 900 px only the measured row remains.
+- **Hackathons:** 3 gold, 1 silver and 1 bronze, as one quiet line under the
+  project count. The counts are told as numbers rather than one medal per win:
+  a numeral set beside a medal fights the 1/2/3 engraved on it, so the numeral
+  leads and the medal becomes the accent. It is a fact about the work, not a
+  boast — no switch, no second placement.
+- **Rating:** the LeetCode contest rating as one faint line — “LeetCode 1,852”
+  at 10–11 px, in the same grey as the rest of the page's metadata. No gauge,
+  ruler or dial: the number is the whole mark, and it never competes with the
+  statement. Eight homes are in the page for review (hero foot, opposite the
+  greeting, under the roles, under the credential, inline on it, under the
+  project count, under “Selected work”, and in the footer); pick one with the
+  Rating switch or the `1`–`8` keys, and the choice rides in the URL hash. The
+  default is `5`, the inline line, because it adds no row. Below 900 px that
+  inline line is the only one. `1,852` is a placeholder; set the real rating
+  and profile URL before launch.
 - **`place.html`:** the pencil-and-arrow name in four arrangements — above the
   statement, above it without an arrow, signed underneath, and signed
   underneath without an arrow — each with the JNTUH line beneath the name.
