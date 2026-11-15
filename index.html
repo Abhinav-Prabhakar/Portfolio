@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-wins="a">
   <div class="page">
     <main>
 
@@ -20,6 +20,8 @@
         <div class="greeting">
           <p class="greeting__name">Hi, I’m Abhinav Prabhakar</p>
           <p class="greeting__edu"><img src="assets/img/jntuh.png" alt="" width="303" height="318">Studied at JNTUH, CSE AI/ML</p>
+          <!-- review: wins A — a pencil note under the greeting -->
+          <p class="wins wins--a" aria-label="Hackathons: three gold, two silver, one bronze">hackathons: 3 gold, 2 silver, 1 bronze</p>
         </div>
 
         <div class="hero__body">
@@ -48,6 +50,26 @@
               </li>
             </ol>
           </div>
+
+          <!-- review: wins B — a small ledger under the thread -->
+          <div class="wins wins--b">
+            <p class="wins__cap">Hackathons</p>
+            <ul class="wins__list" aria-label="Hackathons: three gold, two silver, one bronze">
+              <li class="win win--gold"><span class="win__n">3</span><span class="win__k">gold</span></li>
+              <li class="win win--silver"><span class="win__n">2</span><span class="win__k">silver</span></li>
+              <li class="win win--bronze"><span class="win__n">1</span><span class="win__k">bronze</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- review: wins C — medals at the foot of the hero -->
+        <div class="wins wins--c">
+          <p class="wins__cap">Hackathons</p>
+          <ul class="wins__list" aria-label="Hackathons: three gold, two silver, one bronze">
+            <li class="win win--gold"><span class="win__n">3</span></li>
+            <li class="win win--silver"><span class="win__n">2</span></li>
+            <li class="win win--bronze"><span class="win__n">1</span></li>
+          </ul>
         </div>
       </section>
 
@@ -56,7 +78,6 @@
           <h2 class="work__title" id="work-heading">Selected work</h2>
           <p class="work__count" data-count>47 projects</p>
         </div>
-        <p class="work__lede">Every project with a screenshot, in one drifting sheet. Hover a tile to play the ones that move.</p>
 
         <div class="sheet" data-sheet>
           <div class="lane" data-lane></div>
@@ -67,6 +88,7 @@
 
       <footer class="footer">
         <p class="footer__note">&copy; 2026 Abhinav Prabhakar</p>
+        <p class="wins wins--d">Three gold, two silver and one bronze at hackathons.</p>
         <a class="footer__link" href="https://github.com/Abhinav-Prabhakar" target="_blank" rel="noopener">
           GitHub
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -75,6 +97,40 @@
 
     </main>
   </div>
+
+
+  <div class="variants" role="group" aria-label="Wins treatment under review">
+    <span class="variants__label">Wins</span>
+    <button type="button" data-wins="a" aria-pressed="true">A</button>
+    <button type="button" data-wins="b" aria-pressed="false">B</button>
+    <button type="button" data-wins="c" aria-pressed="false">C</button>
+    <button type="button" data-wins="d" aria-pressed="false">D</button>
+  </div>
+
+  <script>
+    /* review only: one wins treatment at a time, remembered in the URL */
+    (() => {
+      const buttons = [...document.querySelectorAll(".variants [data-wins]")];
+      if (!buttons.length) return;
+
+      const apply = (v) => {
+        document.body.dataset.wins = v;
+        buttons.forEach((b) =>
+          b.setAttribute("aria-pressed", String(b.dataset.wins === v))
+        );
+      };
+
+      const start = location.hash.slice(1).toLowerCase();
+      apply(buttons.some((b) => b.dataset.wins === start) ? start : "a");
+
+      buttons.forEach((b) =>
+        b.addEventListener("click", () => {
+          apply(b.dataset.wins);
+          history.replaceState(null, "", `#${b.dataset.wins}`);
+        })
+      );
+    })();
+  </script>
 
   <script src="js/main.js" defer></script>
   <script src="js/work.js" defer></script>
