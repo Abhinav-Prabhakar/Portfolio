@@ -45,8 +45,9 @@
 
 /* ---------- dark paper ----------
    The same sheet, turned over. Paper and ink trade places, but not evenly:
-   pure black against pure white is a harsh edge, so the paper sits at
-   Google's #202124 and the ink just short of white. Surfaces lift with a
+   pure black against pure white is a harsh edge, so the paper sits a shade
+   deeper than Google's #202124 — the same blue-grey, dimmed to three
+   quarters — and the ink stops just short of white. Surfaces lift with a
    little more grey than the page, exactly as they fall darker than it in
    daylight. Shadows go to true black and get softer, because on dark paper
    elevation is read from the glow around an edge, not the drop below it. */
@@ -56,8 +57,8 @@
   --ink: #e8eaed;
   --ink-soft: #bdc1c6;
   --ink-faint: #9aa0a6;
-  --paper: #202124;
-  --surface: #303134;
+  --paper: #18191b;
+  --surface: #26272a;
   --line: rgba(232, 234, 237, 0.1);
   --thread: rgba(232, 234, 237, 0.22);
   --w-text: 440;

@@ -404,7 +404,7 @@
     else delete root.dataset.theme;
 
     if (themeMeta) {
-      themeMeta.setAttribute("content", dark ? "#202124" : "#ffffff");
+      themeMeta.setAttribute("content", dark ? "#18191b" : "#ffffff");
     }
 
     if (themeButton) {
