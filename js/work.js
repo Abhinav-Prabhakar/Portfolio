@@ -383,11 +383,20 @@ const PROJECTS = [
     const hostFor = (target) =>
       target instanceof Element ? target.closest(selector) : null;
 
+    /* rewinding is held back until the clip has faded out, so the poster
+       never has to snap over a video that is still on screen */
+    const rewind = new WeakMap();
+
     root.addEventListener("pointerover", (event) => {
       const host = hostFor(event.target);
       if (!host) return;
       const video = host.querySelector(".hovervid");
       if (!video || reduce.matches) return;
+      const pending = rewind.get(video);
+      if (pending) {
+        clearTimeout(pending);
+        rewind.delete(video);
+      }
       host.classList.add("is-playing");
       const played = video.play();
       if (played && played.catch) played.catch(() => {});
@@ -405,7 +414,14 @@ const PROJECTS = [
       if (!video) return;
       host.classList.remove("is-playing");
       video.pause();
-      video.currentTime = 0;
+      clearTimeout(rewind.get(video));
+      rewind.set(
+        video,
+        setTimeout(() => {
+          video.currentTime = 0;
+          rewind.delete(video);
+        }, 280)
+      );
     });
   }
 

@@ -365,4 +365,68 @@
   }
 
   if (ladder && !reduceMotion.matches) startLadder();
+
+  /* ---------------- press ----------------
+     Every clickable dips under the finger and springs back. The dip is
+     anchored where the pointer landed, not at the centre, so a control
+     reads as a solid object being pushed rather than a shape shrinking
+     in place. None of it is visible until someone actually presses. */
+
+  const pressTarget = (node) =>
+    node instanceof Element
+      ? node.closest("button, a.footer__link, a.tile__link")
+      : null;
+
+  /* a tile presses its screenshot, not its caption */
+  const sinkOf = (el) =>
+    el.matches("a.tile__link") ? el.querySelector(".tile__shot") || el : el;
+
+  let pressed = null;
+
+  const press = (el, point) => {
+    const node = sinkOf(el);
+    const box = node.getBoundingClientRect();
+    if (!box.width || !box.height) return;
+    /* a keyboard press has no pointer to sit under, so it is centred */
+    node.style.setProperty(
+      "--ox",
+      point ? `${(point.x - box.left).toFixed(1)}px` : "50%"
+    );
+    node.style.setProperty(
+      "--oy",
+      point ? `${(point.y - box.top).toFixed(1)}px` : "50%"
+    );
+    node.dataset.pressing = "";
+    pressed = node;
+  };
+
+  const release = () => {
+    if (!pressed) return;
+    delete pressed.dataset.pressing;
+    pressed = null;
+  };
+
+  document.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0 || reduceMotion.matches) return;
+    const el = pressTarget(event.target);
+    if (el) press(el, { x: event.clientX, y: event.clientY });
+  });
+
+  window.addEventListener("pointerup", release);
+  window.addEventListener("pointercancel", release);
+  window.addEventListener("blur", release);
+
+  /* the keyboard gets the same dip, so Enter feels like a press too */
+  document.addEventListener("keydown", (event) => {
+    if (event.repeat || reduceMotion.matches) return;
+    const el = pressTarget(event.target);
+    if (!el) return;
+    if (event.key !== "Enter" && !(event.key === " " && el.matches("button")))
+      return;
+    press(el);
+  });
+
+  document.addEventListener("keyup", (event) => {
+    if (event.key === "Enter" || event.key === " ") release();
+  });
 })();

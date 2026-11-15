@@ -78,10 +78,6 @@ body {
   --press: 0.97;
 }
 
-.variants button[data-pressing] {
-  --press: 0.9;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -521,7 +517,7 @@ body {
   flex: 0 0 auto;
   height: 100%;
   width: calc((var(--row-h) - var(--name-h)) * 1.7);
-  transition: opacity 0.45s var(--ease-out);
+  transition: opacity 0.34s var(--ease-out);
 }
 
 .tile__link {
@@ -539,7 +535,14 @@ body {
   background: #f1f1f2;
   box-shadow: 0 1px 2px rgba(32, 33, 36, 0.06),
     0 14px 30px -20px rgba(32, 33, 36, 0.42);
-  transition: transform 0.55s var(--ease-out), box-shadow 0.55s var(--ease-out);
+  /* lift and press are separate properties, so a finger landing on a tile
+     never cancels the hover lift it is already sitting on */
+  translate: 0 0;
+  scale: var(--press, 1);
+  transform-origin: var(--ox, 50%) var(--oy, 50%);
+  transition: translate 0.55s var(--ease-out),
+    scale var(--press-t, 0.24s) var(--ease-settle),
+    box-shadow 0.55s var(--ease-out);
 }
 
 .tile__shot img {
@@ -550,6 +553,8 @@ body {
   transition: transform 0.8s var(--ease-out);
 }
 
+/* the clip arrives as a focus pull rather than a cut: it resolves out of a
+   soft 1px blur while the poster settles under it */
 .hovervid {
   position: absolute;
   inset: 0;
@@ -558,11 +563,16 @@ body {
   object-fit: cover;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s var(--ease);
+  filter: blur(1px);
+  transform: scale(1.02);
+  transition: opacity 0.35s var(--ease), filter 0.4s var(--ease),
+    transform 0.6s var(--ease-out);
 }
 
 .is-playing .hovervid {
   opacity: 1;
+  filter: none;
+  transform: none;
 }
 
 .tile__name {
@@ -604,8 +614,25 @@ body {
     opacity: 1;
   }
 
+  /* attention falls off, it does not switch: the tile under the pointer is
+     full strength, its immediate neighbours stay half-lit, the rest recede */
+  @supports selector(:has(*)) {
+    .lane:has(.tile:hover) .tile {
+      opacity: 0.3;
+    }
+
+    .lane:has(.tile:hover) .tile:hover {
+      opacity: 1;
+    }
+
+    .lane:has(.tile:hover) .tile:has(+ .tile:hover),
+    .lane:has(.tile:hover) .tile:hover + .tile {
+      opacity: 0.6;
+    }
+  }
+
   .tile:hover .tile__shot {
-    transform: translateY(-7px);
+    translate: 0 -7px;
     box-shadow: var(--shadow-2);
   }
 
@@ -752,7 +779,14 @@ body {
   .tile__shot,
   .tile__shot img,
   .tile__name,
-  .tile__arrow {
+  .tile__arrow,
+  .footer__link,
+  .hovervid {
     transition: none;
+  }
+
+  .hovervid {
+    filter: none;
+    transform: none;
   }
 }
