@@ -6,6 +6,11 @@
 
 :root {
   color-scheme: light;
+  /* the clock every colour change on the page runs on */
+  --theme-fade: background-color 0.26s var(--ease), color 0.2s var(--ease),
+    border-color 0.26s var(--ease), box-shadow 0.26s var(--ease),
+    fill 0.26s var(--ease), stroke 0.26s var(--ease),
+    scale 0.26s var(--ease-settle), translate 0.26s var(--ease-out);
   --ink: #202124;
   --ink-soft: #5f6368;
   --ink-faint: #9aa0a6;
@@ -78,11 +83,17 @@ html.is-theming {
 }
 
 html.is-theming * {
-  transition: background-color 0.26s var(--ease), color 0.2s var(--ease),
-    border-color 0.26s var(--ease), box-shadow 0.26s var(--ease),
-    fill 0.26s var(--ease), stroke 0.26s var(--ease),
-    font-weight 0.26s var(--ease), scale 0.26s var(--ease-settle),
-    translate 0.26s var(--ease-out);
+  transition: var(--theme-fade);
+}
+
+/* the type only needs its own clock where the weight actually moves —
+   reshaping the whole page every frame is not worth a detail this small */
+html.is-theming body,
+html.is-theming .hero__title,
+html.is-theming .work__title,
+html.is-theming .hackathons__n,
+html.is-theming .tile__name {
+  transition: var(--theme-fade), font-weight 0.26s var(--ease);
 }
 
 *,
@@ -225,6 +236,13 @@ body {
   height: 18px;
   object-fit: contain;
   opacity: 0.8;
+}
+
+/* the university crest is a dark seal, so on dark paper it loses its
+   colour entirely; lift it just enough to stay a seal */
+:root[data-theme="dark"] .greeting__edu img {
+  opacity: 1;
+  filter: brightness(1.32) saturate(1.06);
 }
 
 @keyframes greeting-in {

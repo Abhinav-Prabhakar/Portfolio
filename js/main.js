@@ -393,7 +393,7 @@
 
   const storedTheme = () => {
     try {
-      return localStorage.getItem("theme");
+      return localStorage.getItem("portfolio:theme");
     } catch (err) {
       return null;
     }
@@ -421,15 +421,18 @@
       const dark = root.dataset.theme !== "dark";
 
       /* the class outlives the change by a hair, then the page goes back
-         to its ordinary transitions */
+         to its ordinary transitions. The read forces the style to settle
+         on the new transitions first, so the colours actually animate
+         instead of being replaced in the same frame. */
       root.classList.add("is-theming");
+      void root.offsetHeight;
       clearTimeout(theming);
       theming = setTimeout(() => root.classList.remove("is-theming"), 320);
 
       paint(dark);
 
       try {
-        localStorage.setItem("theme", dark ? "dark" : "light");
+        localStorage.setItem("portfolio:theme", dark ? "dark" : "light");
       } catch (err) {}
 
       if (!reduceMotion.matches) wakeGlobe();
@@ -456,7 +459,9 @@
   const press = (el, point) => {
     const node = sinkOf(el);
     const box = node.getBoundingClientRect();
-    if (!box.width || !box.height) return;
+    /* width is the one dimension a control cannot work without; a glyph
+       like the globe has no height of its own, and its art hangs above */
+    if (!box.width) return;
     /* a keyboard press has no pointer to sit under, so it is centred */
     node.style.setProperty(
       "--ox",
